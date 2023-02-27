@@ -1,25 +1,102 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Admin Login</title>
-    <link rel="stylesheet" href="./static/css/log.css" />
-  </head>
-  <body>
+    <!DOCTYPE html>
+    <html lang="en">
+    
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Webspresso.com</title>
+        <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" />
+    
+        <link rel="stylesheet" href="style.css">
+        <script src="nav.js"></script>
+    </head>
+<body>
     <div class="bg"></div>
     <div class="container">
-      <div class="logo-container">
-        <img class="logo" src="coffee.png" alt="Logo" />
-      </div>
-      <form>
-        <h1>Admin Login</h1>
-        <div>
-          <input type="text" placeholder="Admin ID" />
-        </div>
-        <div>
-          <input type="password" placeholder="Password" />
-        </div>
-        <input type="submit" value="Login" />
-      </form>
+        <section id="header">
+            <a href="logo"><img src="img/logo.png" class="logo" alt=""></a>
+    
+            <div>
+                <ul id="navbar">
+                    <li><a href="index.html">Home</a></li>
+                    <li>
+                        <a href="">Shop</a>
+                        <ul class="dropdown">
+                            <li><a href="#">Machiens</a></li>
+                            <li><a href="#">Beans</a></li>
+                            <li><a href="#">Coffee</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="login.html">My Account</a></li>
+                    <li><a href="">About</a></li>
+                    <li><a href="#form-details">Contact</a></li>
+                    <li><a class="active" href="adminlogin.html">Admin</a></li>
+                    <li id="lg-bag"><a href="cart.html"><i class="far fa-shopping-bag"></i></a></li>
+                    <a href="#" id="close"><i class="far fa-times"></i></a>
+                    
+                </ul>
+            </div>
+            <div id="mobile">
+                <a href="cart.html"><i class="far fa-shopping-bag"></i></a>
+                <i id="bar" class="fas fa-outdent"></i>
+            </div>
+        </section>
+    <div class="bg"></div>
+    <div class="container">
+        
+        <form id="login-form">
+            <h1>Admin Login</h1>
+            <div>
+                <input type="text" placeholder="Admin ID">
+            </div>
+            <div>
+                <input type="password" placeholder="Password">
+            </div>
+            <input type="submit" value="Login">
+        
+        </form>
     </div>
-  </body>
+
+    <footer class="section-p1">
+        <div class="col contact">
+            <h4>Contact</h4>
+            <p><strong>Address: </strong> Aston University, Birmingham</p>
+            <p><strong>Phone:</strong> +44 1234567890</p>
+            <p><strong>Hours:</strong> 10:00 - 18:00, Mon - Sat</p>
+            
+        </div>
+        <div class="col">
+            <img class="logo" src="img/logo.png" alt="">
+            
+            <div class="follow">
+                <h4>Follow Us</h4>
+                <div class="icon">
+                    <i class="fab fa-facebook-f"></i>
+                    <i class="fab fa-twitter"></i>
+                    <i class="fab fa-instagram"></i>
+                    <i class="fab fa-pinterest-p"></i>
+                    <i class="fab fa-youtube"></i>
+                </div>
+            </div>
+        </div>
+        
+
+        <div class="col install">
+            <h4>Install App</h4>
+            <p>From App Store or Google Play</p>
+            <div class="row">
+                <img src="img/app.jpg" alt="">
+                <img src="img/play.jpg" alt="">
+            </div>
+            <p>Secured Payment Gateways </p>
+            <img src="img/pay.png" alt="">
+        </div>
+
+        
+    </footer>
+
+</body>
 </html>
