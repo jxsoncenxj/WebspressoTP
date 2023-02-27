@@ -2,15 +2,14 @@ package com.group15.Webspresso.controller;
 
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class MainController {
 
   @GetMapping(value = "/")
-  public String home() {
-    return "home.html";
+  public String index() {
+    return "index";
   }
 
   @GetMapping(value = "/login")
@@ -28,3 +27,4 @@ public class MainController {
     return "adminlogin";
   }
 }
+ 
