@@ -13,8 +13,10 @@ public interface UserService {
     User getUserById(int id);
 
     User updateUser(User user);
-
+    
     void deleteUserById(int id);
 
-    
+    User findByUsernameAndPassword(String email, String password);
+
+    void save(User user);
 }

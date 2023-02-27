@@ -13,7 +13,7 @@ import com.group15.Webspresso.service.UserService;
 public class UserServiceImpl implements UserService {
 
     private UserRepository userRepository;
-
+    
     public UserServiceImpl(UserRepository userRepository){
         super();
         this.userRepository = userRepository;
@@ -44,12 +44,10 @@ public class UserServiceImpl implements UserService {
         userRepository.deleteById(id);
     }
     
-    @Autowired
-    private UserRepository userRepository;
 
     @Override
-    public User findByUsername(String username) {
-        return userRepository.findByUsername(username);
+    public User findByUsernameAndPassword(String username, String password) {
+        return userRepository.findByUsernameAndPassword(username, password);
     }
 
     @Override

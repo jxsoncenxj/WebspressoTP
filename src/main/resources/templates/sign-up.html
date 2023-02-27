@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
     <head>
-    <link rel="stylesheet" href="./static/css/style.css">
+    <link rel="stylesheet" href="../css/log.css">
     </head>
 <body>
     <div class="login">
         <h2>Sign Up!</h2> <br>
-        <form action="sign-up.html" action="/signup" method="post">
-            <input type="text" name="username" placeholder="Email Address" /> <br><br>
-            <input type="password" name="password" placeholder="Password" /> <br><br>
+        <form th:action="@{/signup}" th:object = "${user}" method="POST">
+            <input type="text" name="username" placeholder="Email Address" th:field = "*{email}"/> <br><br>
+            <input type="password" name="password" placeholder="Password" th:field = "*{password}"/> <br><br>
             <button class="button" input type="submit" name="submit">Create Account</button>
             <button class="button" input type="reset" value="Clear" >Clear</button>
         </form>
         <h4>
-            Already a user? <a href="login.html" class="btn btn-outline-dark">Login</a>
+            Already a user? <a href="login2" class="btn btn-outline-dark">Login</a>
         </h4>
     <div class = "container-passwords">
         <ul class = "list">

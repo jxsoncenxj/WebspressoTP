@@ -16,7 +16,7 @@ public class User {
     private int id;
 
     @Column(name = "email", nullable = false)
-    private String email;
+    private String username;
 
     @Column(name = "password")
     private String password;
@@ -27,7 +27,7 @@ public class User {
 
     public User(String email, String password){
         super();
-        this.email = email;
+        this.username = email;
         this.password = password;
     }
 
@@ -40,11 +40,11 @@ public class User {
     }
 
     public String getEmail() {
-        return email;
+        return username;
     }
 
     public void setEmail(String email) {
-        this.email = email;
+        this.username = email;
     }
 
     public String getPassword() {

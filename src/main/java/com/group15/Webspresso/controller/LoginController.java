@@ -1,21 +1,46 @@
+package com.group15.Webspresso.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.group15.Webspresso.entity.User;
+import com.group15.Webspresso.repository.UserRepository;
+
 @Controller
 public class LoginController {
 
-    @GetMapping("/login")
-    public String showLoginForm() {
-        return "login";
-    }
+    // @GetMapping("/login")
+    // public String showLoginForm() {
+    //     return "login";
+    // }
 
-    @PostMapping("/login")
-    public String login(@RequestParam String email, @RequestParam String password) {
-        // Authenticate the user and redirect to the home page
-        return "redirect:/home";
+    // @PostMapping("/login")
+    // public String login(@RequestParam String email, @RequestParam String password) {
+    //     // Authenticate the user and redirect to the home page
+    //     return "redirect:/home";
+    // }
+
+    @Autowired
+    private UserRepository userRepository;
+
+    @RequestMapping(value = "/login2", method = RequestMethod.POST)
+    public String login(@RequestParam("email") String username,
+            @RequestParam("password") String password,
+            Model model) {
+        User user = userRepository.findByUsernameAndPassword(username, password);
+        if (user != null) {
+            return "index";
+        } else {
+            model.addAttribute("error", "Invalid username or password");
+            return "login2";
+        }
     }
 }

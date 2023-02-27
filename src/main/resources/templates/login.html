@@ -1,29 +1,28 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    //* Adding Webpage Title
     <title>Login</title>
-    <link rel="stylesheet" href="./static/css/log.css">
+    <link rel="stylesheet" href="../css/log.css">
 </head>
 <body>
     <div class="bg"></div>
     <div class="container">
         <div class="logo-container">
-            <img class="logo" src="coffee.png" alt="Logo">
+            <img class="logo" th:src="@{/images/logo.png}" alt="Logo">
         </div>
-        <form action="/login" method="post">
+        <form th:action="@{/login2}" th:object = "${user}" method="post">
             <h1>Login</h1>
             <div>
-                <input type="text" placeholder="Email" id="username">
+                <input type="text" placeholder="Email" name = "email" id="email">
             </div>
             <div>
-                <input type="password" placeholder="Password" id="password">
+                <input type="password" placeholder="Password" name = "password" id="password">
             </div>
             <input type="submit" value="Login">
-            <div class="signup">
-                Want Free Webspresso? Sign Up Now
+            <div class="signup mt-2">
+                Want Free Webspresso?
                 </br>
-                <a href="#">Signup</a>
+                <a href="signup">Sign Up Now</a>
             </div>
         </form>
     </div>

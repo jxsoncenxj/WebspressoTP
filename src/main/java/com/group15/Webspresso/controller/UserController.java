@@ -1,11 +1,16 @@
 package com.group15.Webspresso.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.group15.Webspresso.entity.User;
+import com.group15.Webspresso.repository.UserRepository;
 import com.group15.Webspresso.service.UserService;
 
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -39,10 +44,24 @@ public class UserController {
         return "create_user";
     }
 
+    @GetMapping("/signup")
+    public String signUpUserForm(Model model) {
+        // create product object to hold product form data
+        User user = new User();
+        model.addAttribute("user", user);
+        return "sign-up";
+    }
+
     @PostMapping("/users")
     public String saveUser(@ModelAttribute("user") User user) {
         userService.saveUser(user);
         return redirectString;
+    }
+
+    @PostMapping("/signup")
+    public String saveUserForSignUp(@ModelAttribute("user") User user) {
+        userService.saveUser(user);
+        return "login";
     }
 
     @GetMapping("/users/edit/{id}")
@@ -67,4 +86,5 @@ public class UserController {
         userService.deleteUserById(id);
         return redirectString;
     }
+
 }
