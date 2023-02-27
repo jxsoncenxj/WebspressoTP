@@ -1,14 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
     <head>
     <link rel="stylesheet" href="./static/css/style.css">
     </head>
 <body>
     <div class="login">
         <h2>Sign Up!</h2> <br>
-        <form action="sign-up.html" method="post">
-            <input type="text" name="username" placeholder="Username" /> <br><br>
-            <input type="text" name="email" placeholder="Email Address" /> <br><br>
+        <form action="sign-up.html" action="/signup" method="post">
+            <input type="text" name="username" placeholder="Email Address" /> <br><br>
             <input type="password" name="password" placeholder="Password" /> <br><br>
             <button class="button" input type="submit" name="submit">Create Account</button>
             <button class="button" input type="reset" value="Clear" >Clear</button>

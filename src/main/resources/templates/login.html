@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     //* Adding Webpage Title
     <title>Login</title>
@@ -11,13 +11,13 @@
         <div class="logo-container">
             <img class="logo" src="coffee.png" alt="Logo">
         </div>
-        <form>
+        <form action="/login" method="post">
             <h1>Login</h1>
             <div>
-                <input type="text" placeholder="Username">
+                <input type="text" placeholder="Email" id="username">
             </div>
             <div>
-                <input type="password" placeholder="Password">
+                <input type="password" placeholder="Password" id="password">
             </div>
             <input type="submit" value="Login">
             <div class="signup">

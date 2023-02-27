@@ -6,4 +6,6 @@ import com.group15.Webspresso.entity.User;
 
 public interface UserRepository extends JpaRepository <User, Integer> {
 
+    User findByUsername(String username);
+    
 }
