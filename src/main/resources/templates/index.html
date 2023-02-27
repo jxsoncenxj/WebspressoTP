@@ -1,136 +1,126 @@
 <!DOCTYPE html>
-<html
-  lang="en"
-  xmlns:th="http://www.thymeleaf.org"
-  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
->
-  <head>
-    <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
-    />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
-      crossorigin="anonymous"
-    />
-    <link
-      rel="stylesheet"
-      href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
-      integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ"
-      crossorigin="anonymous"
-    />
-    <title>Webspresso</title>
-  </head>
-  <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="#">
-          <img
-            th:src="@{/images/logo.png}"
-            src="../static/images/logo.png"
-            width="auto"
-            height="80"
-            class="d-inline-block align-top rounded-circle"
-            alt=""
-          />
-        </a>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-toggle="collapse"
-          data-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
+<html lang="en">
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mr-auto"></ul>
-          <ul class="navbar-nav">
-            <li class="nav-item active">
-              <a class="nav-link" th:href="@{/}" href="#">Home</a>
-            </li>
-            <li class="nav-item active">
-              <a class="nav-link" th:href="@{/shop}" href="#">Shop</a>
-            </li>
-            <li class="nav-item active">
-              <a
-                class="nav-link"
-                sec:authorize="isAnonymous()"
-                th:href="@{/login}"
-                href="#"
-                >Login</a
-              >
-            </li>
-            <li class="nav-item active">
-              <a
-                class="nav-link"
-                sec:authorize="isAuthenticated()"
-                th:href="@{/logout}"
-                href="#"
-                >Logout</a
-              >
-            </li>
-            <li class="nav-item active">
-              <a class="nav-link" th:href="@{/cart}" href="#">Cart</a>
-            </li>
-            <li class="nav-item active">
-              <span class="nav-link" th:text="${cartCount}">0</span>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Webspresso.com</title>
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" />
+    <link rel="stylesheet" href="style.css">
+    <script src="nav.js"></script>
+    <style>
+       
+    </style>
+</head>
+<style>
+    html, body {
+  height: 100%;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  background: rgb(239, 239, 239) url(img/hero4.jpg) center center no-repeat;;
+-webkit-background-size: cover;
+-moz-background-size: cover;
+-o-background-size: cover;
+background-size: cover;
+}
+</style>
 
-    <h1 class="text-center mt-5">Welcome to Webspresso</h1>
-    <p class="text-center bold">Coffee straight to your door, it's roasted.</p>
+<body >
+  
+    <section id="header">
+        <a href="logo"><img src="img/logo.png" class="logo" alt=""></a>
 
-    <div class="container">
-      <div class="row">
-        <div class="col-sm-4 text-center">
-          <img
-            th:src="@{/images/coffee1.jpg}"
-            class="img-fluid mt-5"
-            alt="Image 1"
-          />
+        <div>
+            <ul id="navbar">
+                
+                <li><a class="active" href="index.html">Home</a></li>
+                <li>
+                    <a href="">Shop</a>
+                    <ul class="dropdown">
+                        <li><a href="#">Machines</a></li>
+                        <li><a href="#">Beans</a></li>
+                        <li><a href="#">Coffee</a></li>
+                    </ul>
+                </li>
+                <li><a href="login.html">My Account</a></li>
+                <li><a href="">About</a></li>
+                <li><a href="#form-details">Contact</a></li>
+                <li id="admin"><a href="adminlogin.html">Admin</a></li>
+                <li id="lg-bag"><a href="cart.html"><i class="far fa-shopping-bag"></i></a></li>
+                
+                <a href="#" id="close"><i class="far fa-times"></i></a>
+            </ul>
         </div>
-        <div class="col-sm-4 text-center">
-          <img
-            th:src="@{/images/coffee3.jpg}"
-            class="img-fluid mt-5"
-            alt="Image 2"
-          />
+        <div id="mobile">
+            <a href="cart.html"><i class="far fa-shopping-bag"></i></a>
+            <i id="bar" class="fas fa-outdent"></i>
         </div>
-        <div class="col-sm-4 text-center">
-          <img
-            th:src="@{/images/coffee2.jpg}"
-            class="img-fluid mt-5"
-            alt="Image 3"
-          />
-        </div>
-      </div>
-    </div>
+    </section>
 
-    <script
-      src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-      integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-      integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-      integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-      crossorigin="anonymous"
-    ></script>
-  </body>
+    <section id="hero">
+        <h4>Welcome to <b><h3>Webspresso</h3></b> </h4>
+        <h2>Discover the taste of real coffee</h2>
+        <h1>Delivered at your door steps</h1>
+        <button>More info</button>
+    </section>
+
+    
+
+    <section id="form-details">
+        
+        <form action="">
+            <span>LEAVE A MESSAGE</span>
+            <h2>We love to hear from you </h2>
+            <input type="text" name="" id="" placeholder="Your Name">
+            <input type="text" name="" id="" placeholder="E-mail">
+            <input type="text" name="" id="" placeholder="Subject">
+            <textarea name="" id="" cols="30" rows="10" placeholder="Your Message"></textarea>
+            <button class="normal">Submit</button>
+        </form>
+
+    </section>
+
+    <footer class="section-p1">
+        <div class="col contact">
+            <h4>Contact</h4>
+            <p><strong>Address: </strong> Aston University, Birmingham</p>
+            <p><strong>Phone:</strong> +44 1234567890</p>
+            <p><strong>Hours:</strong> 10:00 - 18:00, Mon - Sat</p>
+            
+        </div>
+        <div class="col">
+            <img class="logo" src="img/logo.png" alt="">
+            
+            <div class="follow">
+                <h4>Follow Us</h4>
+                <div class="icon">
+                    <i class="fab fa-facebook-f"></i>
+                    <i class="fab fa-twitter"></i>
+                    <i class="fab fa-instagram"></i>
+                    <i class="fab fa-pinterest-p"></i>
+                    <i class="fab fa-youtube"></i>
+                </div>
+            </div>
+        </div>
+        
+
+        <div class="col install">
+            <h4>Install App</h4>
+            <p>From App Store or Google Play</p>
+            <div class="row">
+                <img src="img/app.jpg" alt="">
+                <img src="img/play.jpg" alt="">
+            </div>
+            <p>Secured Payment Gateways </p>
+            <img src="img/pay.png" alt="">
+        </div>
+
+        
+    </footer>
+
+    
+
+</body>
 </html>
