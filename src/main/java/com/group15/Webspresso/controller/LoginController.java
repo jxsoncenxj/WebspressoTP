@@ -40,7 +40,21 @@ public class LoginController {
             return "index";
         } else {
             model.addAttribute("error", "Invalid username or password");
-            return "login2";
+            return "login";
         }
     }
+
+    @RequestMapping(value = "/adminLogin", method = RequestMethod.POST)
+    public String adminLogin(@RequestParam("username") String username,
+            @RequestParam("password") String password,
+            Model model) {
+        if (username.equals("admin") && password.equals("password")) {
+            return "redirect:/products";
+        } else {
+            model.addAttribute("error", "Invalid username or password");
+            return "adminlogin";
+        }
+    }
+
+
 }
