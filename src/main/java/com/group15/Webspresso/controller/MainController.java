@@ -26,5 +26,10 @@ public class MainController {
   public String adminlogin() {
     return "adminlogin";
   }
+
+  @GetMapping(value = "/about")
+  public String about() {
+    return "about";
+  }
 }
  
