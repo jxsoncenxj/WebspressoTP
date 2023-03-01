@@ -1,39 +1,39 @@
 <!DOCTYPE html>
 <html>
-    <!DOCTYPE html>
     <html lang="en">
     
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Webspresso.com</title>
+        <title>Admin Login</title>
         <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" />
     
-        <link rel="stylesheet" href="style.css">
-        <script src="nav.js"></script>
+        <link rel="stylesheet" href="../css/log.css">
+        <link rel="stylesheet" href="../css/style.css">
+        <script src="../js/nav.js"></script>
     </head>
 <body>
     <div class="bg"></div>
     <div class="container">
         <section id="header">
-            <a href="logo"><img src="img/logo.png" class="logo" alt=""></a>
+        <a href="logo"><img th:src="@{/images/logo.png}" class="logo" alt=""></a>
     
             <div>
                 <ul id="navbar">
-                    <li><a href="index.html">Home</a></li>
+                    <li><a th:href="@{/home}">Home</a></li>
                     <li>
                         <a href="">Shop</a>
                         <ul class="dropdown">
-                            <li><a href="#">Machiens</a></li>
+                            <li><a href="#">Machines</a></li>
                             <li><a href="#">Beans</a></li>
                             <li><a href="#">Coffee</a></li>
                         </ul>
                     </li>
-                    <li><a href="login.html">My Account</a></li>
+                    <li><a th:href="@{/login2}">My Account</a></li>
                     <li><a href="">About</a></li>
                     <li><a href="#form-details">Contact</a></li>
-                    <li><a class="active" href="adminlogin.html">Admin</a></li>
+                    <li><a class="active" th:href="adminLogin">Admin</a></li>
                     <li id="lg-bag"><a href="cart.html"><i class="far fa-shopping-bag"></i></a></li>
                     <a href="#" id="close"><i class="far fa-times"></i></a>
                     
@@ -46,17 +46,23 @@
         </section>
     <div class="bg"></div>
     <div class="container">
-        
-        <form id="login-form">
+         <form th:action="@{/adminLogin}" method="post">
             <h1>Admin Login</h1>
-            <div>
-                <input type="text" placeholder="Admin ID">
+            <div th:if="${error}">
+                <p th:text="${error}" style="color: red;"></p>
             </div>
             <div>
-                <input type="password" placeholder="Password">
+                <input type="text" placeholder="Username" name = "username" id="username">
+            </div>
+            <div>
+                <input type="password" placeholder="Password" name = "password" id="password">
             </div>
             <input type="submit" value="Login">
-        
+            <div class="signup mt-2">
+                Want Free Webspresso?
+                </br>
+                <a href="signup">Sign Up Now</a>
+            </div>
         </form>
     </div>
 

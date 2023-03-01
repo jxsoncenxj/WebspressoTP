@@ -3,6 +3,7 @@ package com.group15.Webspresso.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.ui.Model;
 
 @Controller
 public class MainController {
@@ -22,7 +23,7 @@ public class MainController {
     return "sign-up";
   }
 
-  @GetMapping(value = "/adminlogin")
+  @GetMapping(value = "/adminLogin")
   public String adminlogin() {
     return "adminlogin";
   }
@@ -31,5 +32,12 @@ public class MainController {
   public String about() {
     return "about";
   }
+
+  @GetMapping("/home")
+  public String home(Model model) {
+    // Add model attributes as needed
+    return "index";
+  }
+
 }
  
