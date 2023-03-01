@@ -44,5 +44,10 @@ public class MainController {
     return "productpage";
   }
 
+  @GetMapping(value = "/aboutus")
+  public String aboutus() {
+    return "aboutus";
+  }
+
 }
  
