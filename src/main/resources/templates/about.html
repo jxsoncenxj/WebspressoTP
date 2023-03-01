@@ -12,34 +12,46 @@
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="../css/style.css">
 </head>
 
 <body>
     <!-- Navigation Bar -->
-    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">Coffee House</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Home</a>
+  <section id="header">
+    <img
+          th:src="@{/images/logo.png}"
+          width="auto"
+          height="80"
+          class="d-inline-block align-top rounded-circle"
+          alt=""
+      />
+
+        <div>
+            <ul id="navbar">
+                
+                <li><a class="active" href="index.html">Home</a></li>
+                <li>
+                    <a href="">Shop</a>
+                    <ul class="dropdown">
+                        <li><a href="#">Machines</a></li>
+                        <li><a href="#">Beans</a></li>
+                        <li><a href="#">Coffee</a></li>
+                    </ul>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Menu</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">About Us</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Contact</a>
-                </li>
+                <li><a href="login2">My Account</a></li>
+                <li><a href="">About</a></li>
+                <li><a href="#form-details">Contact</a></li>
+                <li id="admin"><a href="products">Admin</a></li>
+                <li id="lg-bag"><a href="cart.html"><i class="far fa-shopping-bag"></i></a></li>
+                
+                <a href="#" id="close"><i class="far fa-times"></i></a>
             </ul>
         </div>
-    </nav>
+        <div id="mobile">
+            <a href="cart.html"><i class="far fa-shopping-bag"></i></a>
+            <i id="bar" class="fas fa-outdent"></i>
+        </div>
+    </section>
 
     <!-- About Us Section -->
     <section id="about-us">
@@ -72,4 +84,5 @@
 
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIA
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIA"></script>
+

@@ -39,5 +39,10 @@ public class MainController {
     return "index";
   }
 
+  @GetMapping(value = "/store")
+  public String store() {
+    return "productpage";
+  }
+
 }
  
