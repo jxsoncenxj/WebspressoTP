@@ -87,4 +87,13 @@ public class UserController {
         return redirectString;
     }
 
+    @GetMapping("/userDashboard/{userId}")
+    public String userDashboard(@PathVariable("userId") int userId, Model model) {
+        User user = userService.getUserById(userId);
+        // Add the user object to the model for use in the Thymeleaf template
+        model.addAttribute("user", user);
+        // Return the name of the Thymeleaf template for the user dashboard page
+        return "userDashboard";
+    }
+
 }

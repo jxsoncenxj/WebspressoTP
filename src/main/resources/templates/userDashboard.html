@@ -2,7 +2,7 @@
 <html lang="eng" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
-    <title>Product Management System</title>
+    <title>User Dashboard</title>
     <link rel="stylesheet" 
         href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" 
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" 
@@ -11,7 +11,9 @@
 <body>
     <nav class="navbar navbar-expand-md bg-dark navbar-dark">
         <!-- Brand -->
-        <a class="navbar-brand" th:href="@{/products}">Inventory Management System</a>
+        <a class="navbar-brand" th:href="@{/userDashboard/{userId}(userId=${userId})}">User Dashboard</a>
+
+
 
         <!-- Toggler/collapsibe Button -->
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
@@ -20,14 +22,6 @@
 
         <!-- Navbar links -->
         <div class="collapse navbar-collapse" id="collapsibleNavbar">
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/products}">Products</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/users}">Users</a>
-                </li>
-            </ul>
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
                     <a class="nav-link" th:href="@{/}">Log Out</a>
@@ -38,21 +32,18 @@
 
     <div class = "container">
         <div class = "row">
-            <h1> List Products </h1>
+            <h1> Orders </h1>
         </div>
 
         <div class="row">
-            <div class = "col-lg-3">
-                <a th:href = "@{/products/new}" class = "btn btn-primary btn-sm mb-3"> Add Product</a>
-            </div>
         </div>
         <table class= "table table-bordered table-striped">
             <thead class = "thead-dark">
                 <tr>
-                    <th>Product Name</th>
-                    <th>Product Price</th>
-                    <th>Product Description</th>
-                    <th>Product Stock</th>
+                    <th>Order ID</th>
+                    <th>Products</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
                     <th>Actions</th>
                 </tr>
             </thead>
