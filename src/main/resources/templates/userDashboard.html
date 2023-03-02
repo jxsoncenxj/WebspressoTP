@@ -30,39 +30,29 @@
         </div>
     </nav>
 
-    <div class = "container">
-        <div class = "row">
-            <h1> Orders </h1>
+    <div class="container">
+        <h1>Orders for User ID <span th:text="${user.id}"></span></h1>
+      <div class="row">
+        <div th:each = "user : ${users}" class="col-md-4">
+          <div class="card mb-4 box-shadow">
+            <img
+              class="card-img-top"
+              src="../images/productImage.png"
+              alt="Product 1"
+            />
+            <div class="card-body">
+              <h2 th:text = "${user.username}"></h2>
+              <p class="card-text" th:text = "${product.productDescription}"></p>
+              <div class="d-flex justify-content-between align-items-center">
+                <button type="button" class="btn btn-sm btn-outline-secondary">
+                  Buy Now
+                </button>
+                <small class="text-muted" th:text="'£' + ${product.productPrice}"></small>
+              </div>
+            </div>
+          </div>
         </div>
-
-        <div class="row">
-        </div>
-        <table class= "table table-bordered table-striped">
-            <thead class = "thead-dark">
-                <tr>
-                    <th>Order ID</th>
-                    <th>Products</th>
-                    <th>Quantity</th>
-                    <th>Price</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-
-            <tbody>
-                <tr th:each = "product : ${products}">
-                    <td th:text = "${product.productName}"></td>
-                    <td th:text = "${product.productPrice}"></td>
-                    <td th:text = "${product.productDescription}"></td>
-                    <td th:text = "${product.productStock}"></td>
-                    <td>
-                        <a th:href="@{/products/edit/{id}(id=${product.id})}"
-                        class = "btn btn-primary">Edit</a>
-                        <a th:href="@{/products/{id}(id=${product.id})}"
-                        class = "btn btn-danger">Delete</a>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>    
+      </div>
+    </div>   
 </body>
 </html>

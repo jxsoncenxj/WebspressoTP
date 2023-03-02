@@ -1,5 +1,7 @@
 package com.group15.Webspresso.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,8 +11,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.group15.Webspresso.entity.Order;
 import com.group15.Webspresso.entity.User;
 import com.group15.Webspresso.repository.UserRepository;
+import com.group15.Webspresso.service.OrderService;
 import com.group15.Webspresso.service.UserService;
 
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -22,6 +26,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 public class UserController {
 
     private UserService userService;
+    @Autowired
+    private OrderService orderService;
     private String redirectString = "redirect:/users";
 
     public UserController(UserService userService) {
@@ -90,8 +96,11 @@ public class UserController {
     @GetMapping("/userDashboard/{userId}")
     public String userDashboard(@PathVariable("userId") int userId, Model model) {
         User user = userService.getUserById(userId);
+        List<Order> orders = orderService.getOrdersForUser(userId);
         // Add the user object to the model for use in the Thymeleaf template
         model.addAttribute("user", user);
+        //Add the orders to the model for use in thethymeleaf template  
+        model.addAttribute("orders", orders);
         // Return the name of the Thymeleaf template for the user dashboard page
         return "userDashboard";
     }

@@ -10,6 +10,8 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
+import java.util.ArrayList;
+
 @Entity
 @Table(name = "orders")
 public class Order {
@@ -22,8 +24,18 @@ public class Order {
     private List<OrderItem> orderItems;
 
     @ManyToOne
-    @JoinColumn(name = "userId", nullable = false)
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
+
+    public Order() {
+        this.orderItems = new ArrayList<>();
+    }
+
+    public Order(User user, List<OrderItem> orderItems) {
+        super();
+        this.user = user;
+        this.orderItems = orderItems;
+    }
 
     // getters and setters
     public List<OrderItem> getOrderItems() {
@@ -41,6 +53,4 @@ public class Order {
     public void setUser(User user) {
         this.user = user;
     }
-
-    
 }

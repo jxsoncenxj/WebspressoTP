@@ -28,7 +28,17 @@ public class OrderItem {
 
     @Column(nullable = false)
     private Integer quantity;
+
+    public OrderItem(){
+
+    }
     
+    public OrderItem(Order order, Product product, Integer quantity){
+        super();
+        this.order = order;
+        this.product = product;
+        this.quantity = quantity;
+    }
     // getters and setters
     
     public Order getOrder() {
