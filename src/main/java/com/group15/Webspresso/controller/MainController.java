@@ -28,10 +28,25 @@ public class MainController {
     return "adminlogin";
   }
 
+  @GetMapping(value = "/about")
+  public String about() {
+    return "about";
+  }
+
   @GetMapping("/home")
   public String home(Model model) {
     // Add model attributes as needed
     return "index";
+  }
+
+  @GetMapping(value = "/store")
+  public String store() {
+    return "productpage";
+  }
+
+  @GetMapping(value = "/aboutus")
+  public String aboutus() {
+    return "aboutus";
   }
 
 }

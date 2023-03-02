@@ -31,6 +31,13 @@ public class ProductController {
         return "products";
     }
 
+    // handler method to handle list students and return model and view
+    @GetMapping("/productsPage")
+    public String displayProducts(Model model) {
+        model.addAttribute("products", productService.getAllProducts());
+        return "productsPage";
+    }
+
     @GetMapping("/products/new")
     public String createProductForm(Model model) {
         //create product object to hold product form data

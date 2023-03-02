@@ -37,7 +37,8 @@ public class LoginController {
             Model model) {
         User user = userRepository.findByUsernameAndPassword(username, password);
         if (user != null) {
-            return "index";
+            int userId = user.getId(); // Get the ID of the authenticated user
+            return "redirect:/userDashboard/" + userId; // Redirect to the userDashboard page with the ID parameter
         } else {
             model.addAttribute("error", "Invalid username or password");
             return "login";

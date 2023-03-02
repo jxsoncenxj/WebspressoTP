@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>About Us - Coffee House</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+    <!-- Navigation Bar -->
+  <section id="header">
+    <img
+            th:src="@{/images/logo.png}"
+            width="auto"
+            height="80"
+            class="logo d-inline-block align-top rounded-circle"
+            alt=""
+        />
+
+        <div>
+            <ul id="navbar">
+                
+                <li><a class="active"th:href="@{/}">Home</a></li>
+                <li>
+                    <a href="productsPage">Shop</a>
+                    <ul class="dropdown">
+                        <li><a href="#">Machines</a></li>
+                        <li><a href="#">Beans</a></li>
+                        <li><a href="#">Coffee</a></li>
+                    </ul>
+                </li>
+                <li><a href="login2">My Account</a></li>
+                <li><a href="aboutus">About</a></li>
+                <li><a href="#form-details">Contact</a></li>
+                <li id="admin"><a href="adminLogin">Admin</a></li>
+                <li id="lg-bag"><a href="cart.html"><i class="far fa-shopping-bag"></i></a></li>
+                
+                <a href="#" id="close"><i class="far fa-times"></i></a>
+            </ul>
+        </div>
+        <div id="mobile">
+            <a href="cart.html"><i class="far fa-shopping-bag"></i></a>
+            <i id="bar" class="fas fa-outdent"></i>
+        </div>
+    </section>
+
+    <h1 class="mt-5 mb-5 text-center">About Us</h1>
+
+    <!-- About Us Section -->
+    <section id="about-us">
+        <div class="container mt-5">
+            <div class="row">
+                <div class="col-lg-6">
+                    <h2>About Us</h2>
+                    <p>Our team of expert baristas is dedicated to crafting the perfect cup of coffee for you, whether you prefer a classic latte or a more adventurous pour-over. We believe that every cup of coffee is an opportunity to connect with others and make the world a better place, one sip at a time.</p>
+                    <p>We pride ourselves on providing our customers with a unique and personalized coffee experience. We offer a wide range of coffee blends, including single-origin and specialty blends, each with its own distinct flavor profile and roast level. Our coffee is roasted in small batches to ensure maximum freshness and flavor.</p>
+                </div>
+                <div class="col-lg-6">
+                    <img  th:src="@{/images/logo.png}" alt="Webspresso" class="img-fluid rounded">
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="about-us">
+        <div class="container mt-5">
+            <div class="row">
+                <div class="col-lg-6">
+                    <img  th:src="@{/images/students.jpg}" alt="Students" class="img-fluid rounded">
+                </div>
+                <div class="col-lg-6 ">
+                    <p>As a company founded by a group of students from Aston University, Webspresso is fueled by the drive, creativity, and passion that comes with being a student entrepreneur. We are committed to delivering exceptional products and services, while also pursuing our academic goals.</p>
+                    <p>Being students has given us a unique perspective on the coffee industry, as well as on the needs and preferences of our fellow students and young professionals. We understand the importance of quality coffee in keeping us alert and focused, especially during long study sessions and demanding work schedules.</p>
+                
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <p>&copy; Webspresso. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIA"></script>
+
