@@ -2,26 +2,71 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
     <head>
     <link rel="stylesheet" href="../css/log.css">
+    <link rel="stylesheet" href="../css/style.css">
     </head>
 <body>
-    <div class="login">
-        <h2>Sign Up!</h2> <br>
-        <form th:action="@{/signup}" th:object = "${user}" method="POST">
-            <input type="text" name="username" placeholder="Email Address" th:field = "*{email}"/> <br><br>
-            <input type="password" name="password" placeholder="Password" th:field = "*{password}"/> <br><br>
-            <button class="button" input type="submit" name="submit">Create Account</button>
-            <button class="button" input type="reset" value="Clear" >Clear</button>
+    <section id="header">
+    <img
+            th:src="@{/images/logo.png}"
+            width="auto"
+            height="80"
+            class="logo d-inline-block align-top rounded-circle"
+            alt=""
+        />
+
+        <div>
+            <ul id="navbar">
+                
+                <li><a class="active"th:href="@{/}">Home</a></li>
+                <li>
+                    <a href="productsPage">Shop</a>
+                    <ul class="dropdown">
+                        <li><a href="#">Machines</a></li>
+                        <li><a href="#">Beans</a></li>
+                        <li><a href="#">Coffee</a></li>
+                    </ul>
+                </li>
+                <li><a href="login2">My Account</a></li>
+                <li><a href="aboutus">About</a></li>
+                <li><a href="#form-details">Contact</a></li>
+                <li id="admin"><a href="adminLogin">Admin</a></li>
+                <li id="lg-bag"><a href="cart.html"><i class="far fa-shopping-bag"></i></a></li>
+                
+                <a href="#" id="close"><i class="far fa-times"></i></a>
+            </ul>
+        </div>
+        <div id="mobile">
+            <a href="cart.html"><i class="far fa-shopping-bag"></i></a>
+            <i id="bar" class="fas fa-outdent"></i>
+        </div>
+    </section>
+    <div class="bg"></div>
+    <div class="container">
+        <form th:action="@{/signup}" th:object = "${user}" method="post">
+            <h1>Sign Up</h1>
+            <div th:if="${error}">
+                <p th:text="${error}" style="color: red;"></p>
+            </div>
+            <div>
+                <input type="text" name="username" placeholder="Email Address" th:field = "*{email}">
+            </div>
+            <div>
+                <input type="password" name="password" placeholder="Password" th:field = "*{password}">
+            </div>
+            <input type="submit" value="Create Account">
+            <div class="signup mt-2">
+                </br>
+                <a href="login2">Log in</a>
+            </div>
+            <div class = "container-passwords">
+                <ul class = "list">
+                    <h4> Your password must contain: </h4>
+                    <li> At least one UPPPERCASE letter </li>   
+                    <li> At least 2 numbers </li>
+                    <li> A special case letter, e.g., . , / ? ! </li>
+                </ul>
+    </div>
         </form>
-        <h4>
-            Already a user? <a href="login2" class="btn btn-outline-dark">Login</a>
-        </h4>
-    <div class = "container-passwords">
-        <ul class = "list">
-        <h4> Your password must contain: </h4>
-         <li> At least one UPPPERCASE letter </li>   
-         <li> At least 2 numbers </li>
-         <li> A special case letter, e.g., . , / ? ! </li>
-         </ul>
     </div>
 </body>
 
