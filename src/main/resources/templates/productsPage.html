@@ -1,74 +1,82 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Product Page</title>
-    <link rel="stylesheet" href="../css/style.css" />
-    <link
-      rel="stylesheet"
-      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-    />
-  </head>
-  <body>
-      <section id="header">
-    <img
-          th:src="@{/images/logo.png}"
-          width="auto"
-          height="80"
-          class="logo d-inline-block align-top rounded-circle"
-          alt=""
-      />
-
-        <div>
-            <ul id="navbar">
-                
-                <li><a class="active"th:href="@{/}">Home</a></li>
-                <li>
-                    <a href="productsPage">Shop</a>
-                    <ul class="dropdown">
-                        <li><a href="#">Machines</a></li>
-                        <li><a href="#">Beans</a></li>
-                        <li><a href="#">Coffee</a></li>
-                    </ul>
-                </li>
-                <li><a href="login2">My Account</a></li>
-                <li><a href="aboutus">About</a></li>
-                <li><a href="#form-details">Contact</a></li>
-                <li id="admin"><a href="adminLogin">Admin</a></li>
-                <li id="lg-bag"><a href="cart.html"><i class="far fa-shopping-bag"></i></a></li>
-                
-                <a href="#" id="close"><i class="far fa-times"></i></a>
-            </ul>
-        </div>
-        <div id="mobile">
-            <a href="cart.html"><i class="far fa-shopping-bag"></i></a>
-            <i id="bar" class="fas fa-outdent"></i>
-        </div>
-    </section>
-    <br>
-    <div class="container">
-      <h1>Our Products</h1>
-      <div class="row">
-        <div th:each = "product : ${products}" class="col-md-4">
-          <div class="card mb-4 box-shadow">
-            <img
-              class="card-img-top"
-              src="../images/productImage.png"
-              alt="Product 1"
-            />
-            <div class="card-body">
-              <h2 th:text = "${product.productName}"></h2>
-              <p class="card-text" th:text = "${product.productDescription}"></p>
-              <div class="d-flex justify-content-between align-items-center">
-                <button type="button" class="btn btn-sm btn-outline-secondary">
-                  Buy Now
-                </button>
-                <small class="text-muted" th:text="'£' + ${product.productPrice}"></small>
-              </div>
-            </div>
+<head>
+    <meta charset="UTF-8">
+    <title>Products</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+</head>
+<body>
+    <section id="header">
+      <img
+            th:src="@{/images/logo.png}"
+            width="auto"
+            height="80"
+            class="logo d-inline-block align-top rounded-circle"
+            alt=""
+        />
+  
+          <div>
+              <ul id="navbar">
+                  
+                  <li><a class="active"th:href="@{/}">Home</a></li>
+                  <li>
+                      <a href="productsPage">Shop</a>
+                      <ul class="dropdown">
+                          <li><a href="#">Machines</a></li>
+                          <li><a href="#">Beans</a></li>
+                          <li><a href="#">Coffee</a></li>
+                      </ul>
+                  </li>
+                  <li><a href="login2">My Account</a></li>
+                  <li><a href="aboutus">About</a></li>
+                  <li><a href="#form-details">Contact</a></li>
+                  <li id="admin"><a href="adminLogin">Admin</a></li>
+                  <li id="lg-bag"><a href="cart"><i class="far fa-shopping-bag"></i></a></li>
+                  
+                  <a href="#" id="close"><i class="far fa-times"></i></a>
+              </ul>
           </div>
+          <div id="mobile">
+              <a href="cart.html"><i class="far fa-shopping-bag"></i></a>
+              <i id="bar" class="fas fa-outdent"></i>
+          </div>
+      </section>
+
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="text-center mb-5">Our Products</h1>
+            </div>
         </div>
-      </div>
+        <div class="row">
+            <div class="col-md-4" th:each="product : ${products}">
+                <div class="card mb-4 box-shadow">
+                    <img class="card-img-top" src="../images/productImage.png" alt="Product Image">
+                    <div class="card-body">
+                        <h5 class="card-title" th:text="${product.productName}"></h5>
+                        <p class="card-text" th:text="${product.productDescription}"></p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="btn-group">
+                                <form method="post" th:action="@{/cart/add}">
+                                    <input type="hidden" name="productId" th:value="${product.id}" />
+                                    <div class="form-group">
+                                        <label for="quantity">Quantity:</label>
+                                        <input type="number" class="form-control" id="quantity" name="quantity" min="1" value="1">
+                                    </div>
+                                    <button type="submit" class="btn btn-sm btn-outline-secondary">Add to cart</button>
+                                </form>
+                            </div>
+                            <small class="text-muted" th:text="'£' + ${product.productPrice}"></small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-  </body>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
 </html>

@@ -1,5 +1,8 @@
 package com.group15.Webspresso.entity;
 
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -17,14 +20,16 @@ public class Checkout {
     @Column(name = "user_id")
     private int userId;
 
-    @Column(name = "order_id")
-    private Long orderId;
+    @Column(name = "cart_id")
+    private Long cartId;
 
     @Column(name = "total_price")
-    private double totalPrice;
+    private BigDecimal totalPrice;
+
+    @Column(name = "date")
+    private LocalDateTime createdAt;
 
     // Getters and setters
-    
     public int getUserId() {
         return userId;
     }
@@ -33,19 +38,27 @@ public class Checkout {
         this.userId = userId;
     }
 
-    public Long getOrderId() {
-        return orderId;
+    public Long getCartId() {
+        return cartId;
     }
 
-    public void setOrderId(Long orderId) {
-        this.orderId = orderId;
+    public void setCartId(Long cartId) {
+        this.cartId = cartId;
     }
 
-    public double getTotalPrice() {
+    public BigDecimal getTotalPrice() {
         return totalPrice;
     }
 
-    public void setTotalPrice(double totalPrice) {
+    public void setTotalPrice(BigDecimal totalPrice) {
         this.totalPrice = totalPrice;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
     }
 }
