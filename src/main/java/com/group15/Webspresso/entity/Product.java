@@ -31,14 +31,15 @@ public class Product {
 
     }
 
-    public Product(String productName, Double productPrice, String productDescription, int productStock) {
+    public Product(int id, String productName, Double productPrice, String productDescription, int productStock) {
         super();
+        this.id = id;
         this.productName = productName;
         this.productPrice = productPrice;
         this.productDescription = productDescription;
         this.productStock = productStock;
     }
-
+    
     public int getId() {
         return id;
     }
