@@ -15,9 +15,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.group15.Webspresso.entity.Cart;
 import com.group15.Webspresso.entity.CartItem;
 import com.group15.Webspresso.entity.Product;
+import com.group15.Webspresso.entity.Order;
+import com.group15.Webspresso.entity.OrderStatus;
+import com.group15.Webspresso.entity.User;
 import com.group15.Webspresso.repository.CartItemRepository;
 import com.group15.Webspresso.repository.CartRepository;
 import com.group15.Webspresso.repository.ProductRepository;
+import com.group15.Webspresso.repository.OrderRepository;
+import java.time.LocalDateTime;
 import com.group15.Webspresso.service.CartService;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -102,8 +107,31 @@ public class CartController {
     }
 
     @PostMapping("/cart/checkout")
-    public String checkout() {
-        // TODO: Implement checkout logic
-        return "redirect:/";
+    public String checkout(HttpServletRequest request, Authentication authentication) {
+    // Retrieve the cart for the current user
+    Cart cart = cartService.getCurrentCart(request.getSession());
+    User user = (User) authentication.getPrincipal();
+
+    // Calculate the total price of the items in the cart
+    double totalPrice = 0;
+    for (CartItem item : cart.getItems()) {
+        totalPrice += item.getProduct().getPrice() * item.getQuantity();
     }
+
+    // Create a new order
+    Order order = new Order();
+    order.setUser(user);
+    order.setCart(cart);
+    order.setStatus(OrderStatus.NEW);
+    order.setTotalPrice(totalPrice);
+    order.setTimestamp(LocalDateTime.now());
+    orderRepository.save(order);
+
+    // Clear the cart
+    cart.clear();
+
+    
+
+    return "checkout";
+}
 }

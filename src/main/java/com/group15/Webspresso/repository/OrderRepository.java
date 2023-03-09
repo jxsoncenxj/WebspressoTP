@@ -11,5 +11,7 @@ import com.group15.Webspresso.entity.Order;
 public interface OrderRepository extends JpaRepository<Order, Long> {
 
     List<Order> findByUserId(int userId);
+    List<Order> findByStatus(OrderStatus status);
+
 
 }
