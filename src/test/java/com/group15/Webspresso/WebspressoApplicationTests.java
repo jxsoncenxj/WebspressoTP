@@ -1,66 +1,100 @@
 package com.group15.Webspresso;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
-import java.util.Arrays;
-import java.util.List;
-
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.ui.Model;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.validation.support.BindingAwareModelMap;
+import org.springframework.ui.ExtendedModelMap;
 
-import com.group15.Webspresso.controller.ProductController;
-import com.group15.Webspresso.entity.Product;
-import com.group15.Webspresso.service.ProductService;
+
+import com.group15.Webspresso.controller.UserController;
+import com.group15.Webspresso.entity.User;
+import com.group15.Webspresso.repository.UserRepository;
+import com.group15.Webspresso.service.UserService;
+import com.group15.Webspresso.service.impl.UserServiceImpl;
 
 @SpringBootTest
+@ActiveProfiles("test")
 public class WebspressoApplicationTests {
 
-    private ProductService productService;
-    private ProductController productController;
+    @Autowired
+    private UserRepository userRepository;
 
-    @BeforeEach
-    void setUp() {
-        productService = mock(ProductService.class);
-        productController = new ProductController(productService);
-    }
-	
-	
-	@Test
-	void testCreateProductForm() {
-		// when
-		String viewName = productController.createProductForm(mock(Model.class));
-	
-		// define products list
-		List<Product> products = Arrays.asList(new Product(1, "Product 1", 10.0, "Product 1 description", 10),
-				new Product(2, "Product 2", 20.0, "Product 2 description", 20));
-	
-		// then
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("products");
-		assertEquals("products", modelAndView.getViewName());
-		assertEquals(products, modelAndView.getModel().get("products"));
-	}
-	
-		
+    private final UserService userService = new UserServiceImpl(userRepository);
+
+    private final UserController userController = new UserController(userService);
 
     @Test
-    void testSaveProduct() {
-        // given
-        Product product = new Product(1, "Product 1", 10.0, "Product 1 description", 10);
+    public void testCreateUserForm(){
+        UserController controller = new UserController(userService);
+        Model model = new BindingAwareModelMap();
 
-        // when
-        String viewName = productController.saveProduct(product);
+        String viewName  = controller.createUserForm(model);
 
-        // then
-        assertEquals("redirect:/products", viewName);
+        assertEquals("create_user", viewName);
+        assertEquals(new User(), model.getAttribute("user"));
     }
 
-    // similar tests for other methods
+    @Test
+    public void testSignUpUserForm() {
+        Model model = new BindingAwareModelMap();
+        String viewName = userController.signUpUserForm(model);
+    
+        assertEquals("sign-up", viewName);
+    
+        User user = (User) model.getAttribute("user");
+        assertNotNull(user);
+        assertNull(user.getId());
+    }
+
+    @Test
+    public void testUpdateUser(){
+        //Arrange
+        //Create a test user
+        User user = new User();
+        user.setId(1);
+        user.setEmail("test@testcode.com");
+        user.setPassword("testpassword");
+        
+        //Act
+        //Call the controller method
+        String result = userController.updateUser(user.getId(), user, new ExtendedModelMap());
+
+        //Assert
+        //Verify that the mehtod returns the expected values
+        assertEquals("redirect:/users", result);
+
+        //Verify that the was updated in UserService
+        User updateUser = userService.getUserById(1);
+        assertEquals(user.getEmail(), updateUser.getEmail());
+        assertEquals(user.getPassword(), updateUser.getPassword());
+    }
+
+    @Test
+    public void testSaveUser(){
+        //Arrange
+        User user = new User();
+        user.setId(1);
+        user.setEmail("example@test");
+        user.setPassword("testpassword");
+
+        //Act
+        String result = userController.saveUser(user);
+
+        //Assert
+        assertEquals("redirect:/users", result);
+
+        //Verify that the user has been saved in UserService
+        User savedUser = userService.getUserById(1);
+        assertEquals(user.getEmail(), savedUser.getEmail());
+        assertEquals(user.getPassword(), savedUser.getPassword());
+    }
 }
 
 
