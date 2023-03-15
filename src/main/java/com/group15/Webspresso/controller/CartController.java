@@ -40,6 +40,9 @@ public class CartController {
     private CartItemRepository cartItemRepository;
 
     @Autowired
+    private OrderRepository orderRepository;
+
+    @Autowired
     private ProductRepository productRepository;
 
     @Autowired
@@ -106,32 +109,32 @@ public class CartController {
         return "redirect:/cart";
     }
 
-    @PostMapping("/cart/checkout")
-    public String checkout(HttpServletRequest request, Authentication authentication) {
-    // Retrieve the cart for the current user
-    Cart cart = cartService.getCurrentCart(request.getSession());
-    User user = (User) authentication.getPrincipal();
+    // @PostMapping("/cart/checkout")
+    // public String checkout(HttpServletRequest request, Authentication authentication) {
+    // // Retrieve the cart for the current user
+    // Cart cart = cartService.getCurrentCart(request.getSession());
+    // User user = authentication.getCurrentUser();
 
-    // Calculate the total price of the items in the cart
-    double totalPrice = 0;
-    for (CartItem item : cart.getItems()) {
-        totalPrice += item.getProduct().getPrice() * item.getQuantity();
-    }
+    // // Calculate the total price of the items in the cart
+    // double totalPrice = 0;
+    // for (CartItem item : cart.getCartItems()) {
+    //     totalPrice += item.getProduct().getProductPrice() * item.getQuantity();
+    // }
 
-    // Create a new order
-    Order order = new Order();
-    order.setUser(user);
-    order.setCart(cart);
-    order.setStatus(OrderStatus.NEW);
-    order.setTotalPrice(totalPrice);
-    order.setTimestamp(LocalDateTime.now());
-    orderRepository.save(order);
+    // // Create a new order
+    // Order order = new Order();
+    // order.setUser(user);
+    // order.setCart(cart);
+    // order.setStatus(new OrderStatus());
+    // order.setTotalPrice(totalPrice);
+    // order.setTimestamp(LocalDateTime.now());
+    // orderRepository.save(order);
 
-    // Clear the cart
-    cart.clear();
+    // // Clear the cart
+    // cart.clear();
 
     
 
-    return "checkout";
-}
+    // return "checkout";
+    // }
 }

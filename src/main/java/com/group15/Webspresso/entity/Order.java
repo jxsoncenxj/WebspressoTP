@@ -10,6 +10,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 @Entity
@@ -52,5 +53,14 @@ public class Order {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public void setCart(Cart cart) {
+    }
+
+    public void setTotalPrice(double totalPrice) {
+    }
+
+    public void setTimestamp(LocalDateTime now) {
     }
 }
