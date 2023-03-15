@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import com.group15.Webspresso.entity.Product;
 import com.group15.Webspresso.service.ProductService;
 
+import jakarta.servlet.http.HttpSession;
+
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -26,9 +28,14 @@ public class ProductController {
 
     // handler method to handle list students and return model and view
     @GetMapping("/products")
-    public String listProducts(Model model) {
-        model.addAttribute("products", productService.getAllProducts());
-        return "products";
+    public String listProducts(Model model, HttpSession session) {
+        String sessionType = (String) session.getAttribute("sessionType");
+        if(sessionType != null && sessionType.equals("admin")){
+            model.addAttribute("products", productService.getAllProducts());
+            return "products";
+        } else {
+            return "redirect:/adminLogin";
+        }
     }
 
     // handler method to handle list students and return model and view

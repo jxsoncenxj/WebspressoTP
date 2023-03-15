@@ -96,15 +96,20 @@ public class UserController {
     }
 
     @GetMapping("/userDashboard/{userId}")
-    public String userDashboard(@PathVariable("userId") int userId, Model model) {
-        User user = userService.getUserById(userId);
-        List<Order> orders = orderService.getOrdersForUser(userId);
-        // Add the user object to the model for use in the Thymeleaf template
-        model.addAttribute("user", user);
-        //Add the orders to the model for use in thethymeleaf template  
-        model.addAttribute("orders", orders);
-        // Return the name of the Thymeleaf template for the user dashboard page
-        return "userDashboard";
+    public String userDashboard(@PathVariable("userId") int userId, Model model, HttpSession session) {
+        String sessionType = (String) session.getAttribute("sessionType");
+        if(sessionType != null){
+            User user = userService.getUserById(userId);
+            List<Order> orders = orderService.getOrdersForUser(userId);
+            // Add the user object to the model for use in the Thymeleaf template
+            model.addAttribute("user", user);
+            //Add the orders to the model for use in thethymeleaf template  
+            model.addAttribute("orders", orders);
+            // Return the name of the Thymeleaf template for the user dashboard page
+            return "userDashboard";
+        } else {
+            return "redirect:/login2";
+        }
     }
 
     @GetMapping("/userDashboard")
