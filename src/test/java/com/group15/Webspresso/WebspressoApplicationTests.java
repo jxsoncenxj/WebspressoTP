@@ -11,7 +11,10 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.ui.Model;
 import org.springframework.validation.support.BindingAwareModelMap;
 import org.springframework.ui.ExtendedModelMap;
-
+import org.mockito.Mockito;
+import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 
 import com.group15.Webspresso.controller.UserController;
 import com.group15.Webspresso.entity.User;
@@ -95,6 +98,46 @@ public class WebspressoApplicationTests {
         assertEquals(user.getEmail(), savedUser.getEmail());
         assertEquals(user.getPassword(), savedUser.getPassword());
     }
+
+    @Test
+    public void testEditUserForm(){
+        //Arrange
+        User user = new User();
+        user.setId(1);
+        user.setEmail("john@exmaple.com");
+
+        UserService userService = Mockito.mock(UserService.class);
+        when(userService.getUserById(1)).thenReturn(user);
+
+        //Create a Hashmap for model objects
+        Model model = new ExtendedModelMap();
+
+        //Act
+        String viewName = userController.editUserForm(1, model);
+
+        //Assert
+        assertEquals("edit_user", viewName);
+        assertEquals(user, model.getAttribute("user"));
+    }
+    @Test
+    public void testDeleteUser() {
+        // Arrange
+        User user = new User();
+        user.setId(1);
+        user.setEmail("john@example.com");
+
+        //Create a UserService Object 
+        UserService userService = Mockito.mock(UserService.class);
+        when(userService.getUserById(1)).thenReturn(user);
+
+        // Act
+        String viewName = userController.deleteUser(1);
+
+        // Assert
+        verify(userService, times(1)).deleteUserById(1);
+        assertEquals("redirect:/users", viewName);
+    }
+
 }
 
 
