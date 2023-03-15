@@ -1,7 +1,18 @@
 package com.group15.Webspresso.service.impl;
 
+import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
+import javax.management.relation.Role;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.group15.Webspresso.entity.User;
@@ -13,6 +24,8 @@ import com.group15.Webspresso.service.UserService;
 public class UserServiceImpl implements UserService {
 
     private UserRepository userRepository;
+
+    private BCryptPasswordEncoder passwordEncoder;
     
     public UserServiceImpl(UserRepository userRepository){
         super();
@@ -27,6 +40,18 @@ public class UserServiceImpl implements UserService {
     @Override
     public User saveUser(User user) {
         return userRepository.save(user);
+    }
+
+    public User getUser() {
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String user;
+
+        if (principal instanceof UserDetails) {
+            user = ((UserDetails) principal).getUsername();
+        } else {
+            user = principal.toString();
+        }
+        return userRepository.findByUsername(user);
     }
 
     @Override
@@ -52,6 +77,31 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void save(User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        User user = userRepository.findByUsername(email);
+        return new org.springframework.security.core.userdetails.User(
+                user.getEmail(),
+                user.getPassword(),
+                user.isEnabled(),
+                true,
+                true,
+                true,
+                getAuthorities(user.getRoles()));
+    }
+
+    private Collection<? extends GrantedAuthority> getAuthorities(Collection<Role> roles) {
+        return roles.stream()
+                .map(role -> new SimpleGrantedAuthority("ROLE_" + role.getRoleName().toUpperCase()))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public User findByUsername(String email) {
+        return userRepository.findByUsername(email);
     }
 }

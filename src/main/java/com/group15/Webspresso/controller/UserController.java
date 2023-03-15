@@ -17,6 +17,8 @@ import com.group15.Webspresso.repository.UserRepository;
 import com.group15.Webspresso.service.OrderService;
 import com.group15.Webspresso.service.UserService;
 
+import jakarta.servlet.http.HttpSession;
+
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -103,6 +105,20 @@ public class UserController {
         model.addAttribute("orders", orders);
         // Return the name of the Thymeleaf template for the user dashboard page
         return "userDashboard";
+    }
+
+    @GetMapping("/userDashboard")
+    public String userDashboard(HttpSession session, Model model) {
+        User user = (User) session.getAttribute("user");
+        int userId = (int) session.getAttribute("userId"); // Retrieve the user ID from the session
+        // Use the user and user ID to display the appropriate information on the
+        // dashboard
+        // For example, you could pass the user and user ID to a service method to
+        // retrieve data
+        // and then add that data to the model for rendering in the dashboard view
+        model.addAttribute("user", user);
+        model.addAttribute("userId", userId);
+        return "redirect:/userDashboard/" + userId;
     }
 
 }
