@@ -16,7 +16,6 @@ import com.group15.Webspresso.entity.Cart;
 import com.group15.Webspresso.entity.CartItem;
 import com.group15.Webspresso.entity.Product;
 import com.group15.Webspresso.entity.Order;
-import com.group15.Webspresso.entity.OrderStatus;
 import com.group15.Webspresso.entity.User;
 import com.group15.Webspresso.repository.CartItemRepository;
 import com.group15.Webspresso.repository.CartRepository;

@@ -43,7 +43,7 @@ public class LoginController {
     public String login(@RequestParam String email, @RequestParam String password, HttpSession session,
             RedirectAttributes redirectAttributes, Model model) {
         User user = userService.findByUsername(email);
-        if (user != null) {
+        if (user != null && userService.checkPassword(password, user.getPassword())) {
             session.setAttribute("user", user);
             int userId = user.getId(); // Get the ID of the authenticated user
             session.setAttribute("userId", userId); // Add the user ID to the session
