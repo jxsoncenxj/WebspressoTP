@@ -19,6 +19,7 @@ public class MainController {
 
   @GetMapping(value = "/login2")
   public String login(HttpSession session) {
+    //user is already logged in
     if (session.getAttribute("user") != null) {
       // User is already logged in, redirect to dashboard
       return "redirect:/userDashboard";

@@ -48,6 +48,9 @@
             <div th:if="${error}">
                 <p th:text="${error}" style="color: red;"></p>
             </div>
+            <div th:if="${session.alertMessage != null}" class="alert alert-danger" role="alert">
+                <p th:text="${session.alertMessage}" style="color: red;"></p>
+            </div>
             <div>
                 <input type="text" placeholder="Email" name = "email" id="email">
             </div>
