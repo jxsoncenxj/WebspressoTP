@@ -8,4 +8,6 @@ public interface OrderService {
 
     List<Order> getOrdersForUser(int userId);
 
+    List<Order> getAllOrders();
+
 }

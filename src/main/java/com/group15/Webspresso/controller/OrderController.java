@@ -23,6 +23,7 @@ import com.group15.Webspresso.entity.User;
 import com.group15.Webspresso.repository.CartItemRepository;
 import com.group15.Webspresso.repository.OrderRepository;
 import com.group15.Webspresso.service.CartService;
+import com.group15.Webspresso.service.OrderService;
 import com.group15.Webspresso.service.UserService;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -33,6 +34,9 @@ public class OrderController {
     
     @Autowired
     OrderRepository orderRepository;
+
+    @Autowired
+    OrderService orderService;
 
     @Autowired
     UserService userService;
@@ -109,4 +113,11 @@ public class OrderController {
         return "redirect:/order-confirmation";
     }
 
-}
+
+    // handler method to display all orders
+    @GetMapping("/orders")
+    public String listUsers(Model model) {
+        model.addAttribute("orders", orderService.getAllOrders());
+        return "orders";
+    }
+}   

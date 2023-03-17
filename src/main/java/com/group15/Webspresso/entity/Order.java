@@ -199,5 +199,13 @@ public class Order {
     public void setCvv(String cvv) {
         this.cvv = cvv;
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
     
 }
