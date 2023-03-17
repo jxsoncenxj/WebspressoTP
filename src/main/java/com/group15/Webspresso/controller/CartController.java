@@ -105,6 +105,7 @@ public class CartController {
         // Retrieve the cart for the current user
         Cart cart = cartService.getCurrentCart(request.getSession());
         cart.clear();
+        cartItemRepository.deleteAll();
         return "redirect:/cart";
     }
 

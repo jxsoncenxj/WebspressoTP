@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Order Confirmation</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+</head>
+<body>
+  <div class="container mt-5">
+    <h1>Order Summary</h1>
+    <hr>
+    <div class="row">
+      <div class="col-md-6">
+        <h4>Order Details</h4>
+        <p>Order ID: <span th:text="${order.id}"></span></p>
+        <p>Order Date: <span th:text="${order.orderDate}"></span></p>
+        <p>First Name: <span th:text="${order.firstName}"></span></p>
+        <p>Last Name: <span th:text="${order.lastName}"></span></p>
+        <p>Address: <span th:text="${order.address}"></span></p>
+        <p>City: <span th:text="${order.city}"></span></p>
+        <p>County: <span th:text="${order.county}"></span></p>
+        <p>Postcode: <span th:text="${order.postcode}"></span></p>
+      </div>
+      <div class="col-md-6">
+        <h4>Payment Details</h4>
+        <p>Card Number: <span th:text="${order.cardNumber}"></span></p>
+        <p>Expiration: <span th:text="${order.expiryDate}"></span></p>
+        <p>CVV: <span th:text="${order.cvv}"></span></p>
+      </div>
+    </div>
+    <hr>
+    <h4>Order Items</h4>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Product Name</th>
+          <th>Price</th>
+          <th>Quantity</th>
+          <th>Total Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:each="orderItem : ${order.orderItems}">
+          <td th:text="${orderItem.product.productName}"></td>
+          <td th:text="${orderItem.price}"></td>
+          <td th:text="${orderItem.quantity}"></td>
+          <td th:text="${orderItem.price * orderItem.quantity}"></td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="text-center">
+      <a href="/" class="btn btn-primary">Return to Home Page</a>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+</body>
+</html>
