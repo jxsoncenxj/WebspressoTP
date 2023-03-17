@@ -14,6 +14,7 @@ import com.group15.Webspresso.service.CartService;
 
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class CheckoutController {
@@ -25,10 +26,12 @@ public class CheckoutController {
     private CartItemRepository cartItemRepository;
 
     @PostMapping("/checkout")
-    public String viewCheckout(Model model, HttpServletRequest request) {
+    public String viewCheckout(Model model, HttpServletRequest request, HttpSession session) {
         Cart cart = cartService.getCurrentCart(request.getSession());
         List<CartItem> cartItems = cartItemRepository.findByCartId(cart.getId());
         model.addAttribute("cartItems", cartItems);
+        session.setAttribute("cartItems", cartItems);
         return "checkout";
     }
+
 }

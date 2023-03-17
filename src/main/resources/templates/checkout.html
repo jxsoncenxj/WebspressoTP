@@ -64,11 +64,10 @@
     </table>
   </div>
   <div class="col-md-6 d-inline-block align-top">
-    <form>
       <!-- Checkout form code goes here -->
       <div class="container mt-5">
         <h1 class="mb-4">Checkout</h1>
-        <form>
+        <form method = "post" th:action="@{/placeOrder}">
           <div class="form-row">
             <div class="form-group col-md-6">
               <label for="firstName">First Name</label>
@@ -112,11 +111,10 @@
             </div>
           </div>
           <div class="text-center">
-            <button type="submit" th:action="@{/placeOrder}" class="btn btn-success">Order</button>
+            <button type="submit" class="btn btn-success">Checkout</button>
           </div>
         </form>
       </div>
-    </form>
   </div>
 
 

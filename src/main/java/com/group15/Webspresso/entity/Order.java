@@ -86,6 +86,8 @@ public class Order {
         this.orderItems = orderItems;
     }
 
+    // getters and setters
+
     public User getUser() {
         return user;
     }
@@ -197,9 +199,5 @@ public class Order {
     public void setCvv(String cvv) {
         this.cvv = cvv;
     }
-
-    // getters and setters
-    
-    
     
 }
