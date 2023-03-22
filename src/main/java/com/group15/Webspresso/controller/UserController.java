@@ -31,10 +31,19 @@ public class UserController {
     @Autowired
     private OrderService orderService;
     private String redirectString = "redirect:/users";
+    public UserController(){}
 
     public UserController(UserService userService) {
         super();
         this.userService = userService;
+    }
+
+    public void setUserService(UserService userService) {
+        this.userService = userService;
+    }
+
+    public void setOrderService(OrderService orderService){
+        this.orderService = orderService;
     }
 
     //handler method to display all users

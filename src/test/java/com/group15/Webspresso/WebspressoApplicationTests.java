@@ -4,6 +4,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import jakarta.servlet.http.HttpSession;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -15,12 +20,15 @@ import org.mockito.Mockito;
 import static org.mockito.Mockito.when;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.mock;
 
 import com.group15.Webspresso.controller.UserController;
 import com.group15.Webspresso.entity.User;
 import com.group15.Webspresso.repository.UserRepository;
 import com.group15.Webspresso.service.UserService;
 import com.group15.Webspresso.service.impl.UserServiceImpl;
+import com.group15.Webspresso.entity.Order;
+import com.group15.Webspresso.service.OrderService;
 
 @SpringBootTest
 @ActiveProfiles("test")
@@ -138,7 +146,50 @@ public class WebspressoApplicationTests {
         assertEquals("redirect:/users", viewName);
     }
 
+    @Test
+    public void testUserDashboard() {
+        // Arrange
+        int userId = 1;
+        HttpSession session = mock(HttpSession.class);
+        when(session.getAttribute("sessionType")).thenReturn("user");
+    
+        Model model = mock(Model.class);
+    
+        UserService userService = mock(UserService.class);
+        User user = new User();
+        user.setId(userId);
+        when(userService.getUserById(userId)).thenReturn(user);
+    
+        OrderService orderService = mock(OrderService.class);
+        List<Order> orders = new ArrayList<>();
+        orders.add(new Order());
+        orders.add(new Order());
+        when(orderService.getOrdersForUser(userId)).thenReturn(orders);
+    
+        UserController controller = new UserController();
+        controller.setUserService(userService);
+        controller.setOrderService(orderService);
+    
+        // Act
+        String viewName = controller.userDashboard(userId, model, session);
+    
+        // Assert
+        assertEquals("userDashboard", viewName);
+        verify(model).addAttribute("user", user);
+        verify(model).addAttribute("orders", orders);
+    }
+    
 }
+
+
+
+
+
+  
+
+
+
+
 
 
 
