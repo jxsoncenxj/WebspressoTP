@@ -43,11 +43,15 @@ public class LoginController {
     public String login(@RequestParam String email, @RequestParam String password, HttpSession session,
             RedirectAttributes redirectAttributes, Model model) {
         User user = userService.findByUsername(email);
-        if (user != null) {
+        if (user != null && userService.checkPassword(password, user.getPassword())) {
             session.setAttribute("user", user);
             int userId = user.getId(); // Get the ID of the authenticated user
             session.setAttribute("userId", userId); // Add the user ID to the session
             session.setAttribute("sessionType", "user");
+            // if the user is trying to add a profuct to cart after logging in
+            if (session.getAttribute("authenticatedCheckout") != null) {
+                return "redirect:/productsPage";
+            }
             return "redirect:/userDashboard/" + userId; // Redirect to the userDashboard page with the ID parameter
         } else {
             model.addAttribute("error", "Invalid username or password");

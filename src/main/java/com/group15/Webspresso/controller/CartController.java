@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,7 +17,6 @@ import com.group15.Webspresso.entity.Cart;
 import com.group15.Webspresso.entity.CartItem;
 import com.group15.Webspresso.entity.Product;
 import com.group15.Webspresso.entity.Order;
-import com.group15.Webspresso.entity.OrderStatus;
 import com.group15.Webspresso.entity.User;
 import com.group15.Webspresso.repository.CartItemRepository;
 import com.group15.Webspresso.repository.CartRepository;
@@ -49,7 +49,17 @@ public class CartController {
     private CartService cartService;
 
     @PostMapping("/cart/add")
-    public String addToCart(@RequestParam int productId, @RequestParam int quantity, HttpServletRequest request) {
+    public String addToCart(@RequestParam int productId, @RequestParam int quantity, HttpServletRequest request,
+            org.springframework.security.core.Authentication authentication, HttpSession session) {
+        // Check if user is authenticated
+        if (session.getAttribute("user") == null) {
+            // User not authenticated so redirect to login page and show alert
+            String alertMessage = "You need to login before adding items to your cart.";
+            session.setAttribute("alertMessage", alertMessage);
+            session.setAttribute("authenticatedCheckout", "The user is authenticated");
+            return "redirect:/login2";
+        }
+
         // Retrieve the product from the database
         Optional<Product> productOptional = productRepository.findById(productId);
         if (!productOptional.isPresent()) {
@@ -106,6 +116,7 @@ public class CartController {
         // Retrieve the cart for the current user
         Cart cart = cartService.getCurrentCart(request.getSession());
         cart.clear();
+        cartItemRepository.deleteAll();
         return "redirect:/cart";
     }
 

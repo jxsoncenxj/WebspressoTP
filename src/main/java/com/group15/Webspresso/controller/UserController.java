@@ -31,10 +31,19 @@ public class UserController {
     @Autowired
     private OrderService orderService;
     private String redirectString = "redirect:/users";
+    public UserController(){}
 
     public UserController(UserService userService) {
         super();
         this.userService = userService;
+    }
+
+    public void setUserService(UserService userService) {
+        this.userService = userService;
+    }
+
+    public void setOrderService(OrderService orderService){
+        this.orderService = orderService;
     }
 
     //handler method to display all users
@@ -66,11 +75,43 @@ public class UserController {
         return redirectString;
     }
 
-    @PostMapping("/signup")
-    public String saveUserForSignUp(@ModelAttribute("user") User user) {
-        userService.saveUser(user);
-        return "login";
-    }
+    // @PostMapping("/signup")
+    // public String saveUserForSignUp(@ModelAttribute("user") User user) {
+    //     userService.saveUser(user);
+    //     return "login";
+    // }
+
+
+@PostMapping("/signup")
+public String signUpUser(@ModelAttribute("user") User user, Model model) {
+  String password = user.getPassword();
+
+  if (password == null || password.isEmpty()) {
+    model.addAttribute("error", "Password must not be empty.");
+    return "sign-up";
+  }
+
+  if (password.length() < 8 || password.length() > 15) {
+    model.addAttribute("error", "Password must be between 8 and 15 characters long.");
+    return "sign-up";
+  }
+
+  if (!password.matches(".*[A-Z].*")) {
+    model.addAttribute("error", "Password must contain at least one capital letter.");
+    return "sign-up";
+  }
+
+  if (!password.matches(".*[^a-zA-Z0-9].*")) {
+    model.addAttribute("error", "Password must contain at least one special character.");
+    return "sign-up";
+  }
+
+  else{
+    userService.saveUser(user);
+    return "login";
+  }
+  
+}
 
     @GetMapping("/users/edit/{id}")
     public String editUserForm(@PathVariable int id, Model model) {

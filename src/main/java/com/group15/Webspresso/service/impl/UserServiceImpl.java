@@ -24,8 +24,6 @@ import com.group15.Webspresso.service.UserService;
 public class UserServiceImpl implements UserService {
 
     private UserRepository userRepository;
-
-    private BCryptPasswordEncoder passwordEncoder;
     
     public UserServiceImpl(UserRepository userRepository){
         super();
@@ -39,6 +37,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User saveUser(User user) {
+        String password = user.getPassword();
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        String hashedPassword = passwordEncoder.encode(password);
+        user.setPassword(hashedPassword);
         return userRepository.save(user);
     }
 
@@ -77,8 +79,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void save(User user) {
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        userRepository.save(user);
+        // user.setPassword(passwordEncoder.encode(user.getPassword()));
+        // userRepository.save(user);
+
     }
 
     @Override
@@ -103,5 +106,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public User findByUsername(String email) {
         return userRepository.findByUsername(email);
+    }
+
+    public boolean checkPassword(String plainPassword, String hashedPassword) {
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        return passwordEncoder.matches(plainPassword, hashedPassword);
     }
 }

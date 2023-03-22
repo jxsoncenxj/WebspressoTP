@@ -9,7 +9,7 @@
         crossorigin="anonymous">
 </head>
 <body>
-   <nav class="navbar navbar-expand-md bg-dark navbar-dark">
+    <nav class="navbar navbar-expand-md bg-dark navbar-dark">
         <!-- Brand -->
         <a class="navbar-brand" th:href="@{/products}">Inventory Management System</a>
 
@@ -33,44 +33,40 @@
             </ul>
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link" th:href="@{/}">Log Out</a>
+                    <a class="nav-link" th:href="@{/adminLogout}">Log Out</a>
                 </li>
             </ul>
         </div>
     </nav>
-    <div class = "container">
-        <div class = "row">
-            <h1> List Users </h1>
-        </div>
 
-        <div class="row">
-            <div class = "col-lg-3">
-                <a th:href = "@{/users/new}" class = "btn btn-primary btn-sm mb-3"> Add User</a>
+    <div class = "container">
+            <div class = "row">
+                <h1> List Orders </h1>
             </div>
-        </div>
         <table class= "table table-bordered table-striped">
             <thead class = "thead-dark">
                 <tr>
-                    <th>User Email</th>
-                    <th>User Password</th>
+                    <th>Order ID</th>
+                    <th>Order Status</th>
+                    <th>Total Price</th>
                     <th>Actions</th>
                 </tr>
             </thead>
 
             <tbody>
-                <tr th:each = "user : ${users}">
-                    <td th:text = "${user.email}"></td>
-                    <td th:text = "${user.password}"></td>
+                <tr th:each = "order : ${orders}">
+                    <td th:text = "${order.getId()}"></td>
+                    <td th:text = "${order.getOrderStatus()}"></td>
+                    <td th:text = "${order.getTotalPrice()}"></td>
                     <td>
-                        <a th:href="@{/users/edit/{id}(id=${user.id})}"
-                        class = "btn btn-primary">Edit</a>
-                        <a th:href="@{/users/{id}(id=${user.id})}"
-                        class = "btn btn-danger">Delete</a>
-                    </td>                    
+                        <a 
+                        class = "btn btn-primary">More Info</a>
+                        <a
+                        class="btn btn-primary">Change Order Info</a>
+                    </td>
                 </tr>
             </tbody>
         </table>
     </div>
-    
 </body>
 </html>

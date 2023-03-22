@@ -29,15 +29,19 @@ public class OrderItem {
     @Column(nullable = false)
     private Integer quantity;
 
+    @Column(nullable = false)
+    private double price;
+
     public OrderItem(){
 
     }
     
-    public OrderItem(Order order, Product product, Integer quantity){
+    public OrderItem(Order order, Product product, Integer quantity, Double price){
         super();
         this.order = order;
         this.product = product;
         this.quantity = quantity;
+        this.price = price;
     }
     // getters and setters
     
@@ -63,6 +67,14 @@ public class OrderItem {
 
     public void setQuantity(Integer quantity) {
         this.quantity = quantity;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
     }
     
 }
