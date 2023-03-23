@@ -7,10 +7,10 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 </head>
 <body>
-  <div class="container mt-5">
+  {% comment %} <div class="container mt-5">
     <h1>Order Summary</h1>
     <hr>
-    <div class="row">
+    {% comment %} <div class="row">
       <div class="col-md-6">
         <h4>Order Details</h4>
         <p>Order ID: <span th:text="${order.id}"></span></p>
@@ -48,7 +48,7 @@
           <td th:text="${orderItem.price * orderItem.quantity}"></td>
         </tr>
       </tbody>
-    </table>
+    </table> {% endcomment %}
     <div class="text-center">
       <a href="/" class="btn btn-primary">Return to Home Page</a>
     </div>
@@ -56,6 +56,6 @@
 
   <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script> {% endcomment %}
 </body>
 </html>

@@ -60,9 +60,9 @@
                     <td th:text = "${order.getTotalPrice()}"></td>
                     <td>
                         <a 
-                        class = "btn btn-primary">More Info</a>
+                        class = "btn btn-primary" th:href="@{/orders/summary/{id}(id=${order.id})}">More Info</a>
                         <a
-                        class="btn btn-primary">Change Order Info</a>
+                        class="btn btn-primary" th:href="@{/orders/edit/{id}(id=${order.getId()})}">Change Order Info</a>
                     </td>
                 </tr>
             </tbody>

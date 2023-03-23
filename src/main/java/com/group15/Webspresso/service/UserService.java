@@ -25,4 +25,5 @@ public interface UserService extends UserDetailsService{
     User findByUsername(String email);
 
     boolean checkPassword(String password, String hashed);
+
 }
