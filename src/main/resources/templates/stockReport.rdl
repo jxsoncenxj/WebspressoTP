@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <DataSources>
+    <DataSource Name="myDataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString>yourConnectionString</ConnectString>
+      </ConnectionProperties>
+      <rd:DataSourceID>XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX</rd:DataSourceID>
+    </DataSource>
+  </DataSources>
+  <DataSets>
+    <DataSet Name="myDataSet">
+      <Fields>
+        <Field Name="id">
+          <DataField>id</DataField>
+          <rd:TypeName>System.Int64</rd:TypeName>
+        </Field>
+        <Field Name="name">
+          <DataField>name</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="description">
+          <DataField>description</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="quantity">
+          <DataField>quantity</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+      </Fields>
+      <Query>
+        <CommandText>SELECT * FROM product</CommandText>
+        <DataSourceName>myDataSource</DataSourceName>
+      </Query>
+    </DataSet>
+  </DataSets>
+  <Body>
+    <ReportItems>
+      <Textbox Name="textbox1">
+        <Top>0.25in</Top>
+        <Left>0.25in</Left>
+        <Width>6.5in</Width>
+        <Height>0.25in</Height>
+        <Value>Stock Report</Value>
+      </Textbox>
+      <Table Name="table1">
+        <Top>1.5in</Top>
+        <Left>0.25in</Left>
+        <DataSetName>myDataSet</DataSetName>
+        <Header>
+          <TableRows>
+            <TableRow>
+              <TableCell>
+                <Paragraph>
+                  <Text>Product Name</Text>
+                </Paragraph>
+              </TableCell>
+              <TableCell>
+                <Paragraph>
+                  <Text>Description</Text>
+                </Paragraph>
+              </TableCell>
+              <TableCell>
+                <Paragraph>
+                  <Text>Quantity</Text>
+                </Paragraph>
+              </TableCell>
+            </TableRow>
+          </TableRows>
+        </Header>
+        <Details>
+          <TableRows>
+            <TableRow>
+              <TableCell>
+                <Paragraph>
+                  <Text>=Fields!name.Value</Text>
+                </Paragraph>
+              </TableCell>
+              <TableCell>
+                <Paragraph>
+                  <Text>=Fields!description.Value</Text>
+                </Paragraph>
+              </TableCell>
+              <TableCell>
+                <Paragraph>
+                  <Text>=Fields!quantity.Value</Text>
+                </Paragraph>
+              </TableCell>
+            </TableRow>
+          </TableRows>
+        </Details>
+      </Table>
+    </ReportItems>
+    <Height>2.5in</Height>
+  </Body>
+</Report>
