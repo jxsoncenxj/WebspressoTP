@@ -46,7 +46,7 @@ public class Order {
     private OrderStatus orderStatus;
 
     @Column(name = "total_price")
-    private BigDecimal totalPrice;
+    private Double totalPrice;
 
     @Column(name = "first_name")
     private String firstName;
@@ -120,11 +120,11 @@ public class Order {
         this.orderStatus = orderStatus;
     }
 
-    public BigDecimal getTotalPrice() {
+    public Double getTotalPrice() {
         return totalPrice;
     }
 
-    public void setTotalPrice(BigDecimal totalPrice) {
+    public void setTotalPrice(Double totalPrice) {
         this.totalPrice = totalPrice;
     }
 

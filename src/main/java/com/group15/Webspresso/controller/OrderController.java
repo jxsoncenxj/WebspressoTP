@@ -57,8 +57,8 @@ public class OrderController {
         String lastName = request.getParameter("lastName");
         String address = request.getParameter("address");
         String city = request.getParameter("city");
-        String county = request.getParameter("county");
-        String postcode = request.getParameter("postcode");
+        String county = request.getParameter("state");
+        String postcode = request.getParameter("zip");
         String cardNumber = request.getParameter("cardNumber");
         String expiration = request.getParameter("expiration");
         String cvv = request.getParameter("cvv");
@@ -90,7 +90,7 @@ public class OrderController {
         User user = userService.getUserById(userId);
         order.setUser(user);
 
-        BigDecimal totalPrice = BigDecimal.ZERO;
+        Double totalPrice = 0.00;
 
         List<OrderItem> orderItems = new ArrayList<>();
         for (CartItem cartItem : cartItems) {
@@ -102,9 +102,7 @@ public class OrderController {
             orderItem.setPrice(cartItem.getProduct().getProductPrice());
             orderItem.setOrder(order);
             orderItems.add(orderItem);
-            totalPrice = totalPrice
-                    .add(BigDecimal.valueOf(cartItem.getProduct()
-                            .getProductPrice()).multiply(BigDecimal.valueOf(cartItem.getQuantity())));
+            totalPrice += cartItem.getProduct().getProductPrice() * cartItem.getQuantity();
         }
         order.setOrderItems(orderItems);
         order.setTotalPrice(totalPrice);
@@ -124,7 +122,7 @@ public class OrderController {
         session.setAttribute("orderId", order.getId());
 
         // Return the view for the order confirmation
-        return "order-confirmation";
+        return "redirect:/orderConfirmation";
     }
 
 

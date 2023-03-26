@@ -5,6 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Lob;
 import jakarta.persistence.Table;
 
 @Entity
@@ -26,6 +27,10 @@ public class Product {
 
     @Column(name = "product_stock")
     private int productStock;
+
+    @Lob
+    @Column(name = "image_data", length = Integer.MAX_VALUE, nullable = true)
+    private byte[] imageData;
 
     public Product() {
 
@@ -72,5 +77,15 @@ public class Product {
     public void setProductStock(int productStock) {
         this.productStock = productStock;
     }
+
+    public byte[] getImageData() {
+        return imageData;
+    }
+
+    public void setImageData(byte[] imageData) {
+        this.imageData = imageData;
+    }
+
+    
 
 }
