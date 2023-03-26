@@ -1,7 +1,7 @@
 package com.group15.Webspresso.classes;
 
 public enum OrderStatus {
-    PENDING("Pending"),
+    RECIEVED("Order Recieved"),
     SHIPPED("Shipped"),
     DELIVERED("Delivered");
 

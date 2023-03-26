@@ -25,4 +25,14 @@ public class OrderServiceImpl implements OrderService {
         return orderRepository.findAll();
     }
 
+    @Override
+    public Order getOrderByID(long id) {
+        return orderRepository.findById(id).get();
+    }
+
+    @Override
+    public Order updateOrder(Order order) {
+        return orderRepository.save(order);
+    }
+
 }

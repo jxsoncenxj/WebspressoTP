@@ -6,8 +6,10 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import jakarta.servlet.http.HttpSession;
+import jakarta.servlet.http.HttpServletRequest;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.support.BindingAwareModelMap;
 import org.springframework.ui.ExtendedModelMap;
 import org.mockito.Mockito;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.when;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -29,6 +32,11 @@ import com.group15.Webspresso.service.UserService;
 import com.group15.Webspresso.service.impl.UserServiceImpl;
 import com.group15.Webspresso.entity.Order;
 import com.group15.Webspresso.service.OrderService;
+import com.group15.Webspresso.entity.*;
+import com.group15.Webspresso.controller.*;
+import com.group15.Webspresso.repository.*;
+import org.springframework.security.core.Authentication;
+import static org.mockito.ArgumentMatchers.any;
 
 @SpringBootTest
 @ActiveProfiles("test")
@@ -178,8 +186,35 @@ public class WebspressoApplicationTests {
         verify(model).addAttribute("user", user);
         verify(model).addAttribute("orders", orders);
     }
-    
-}
+
+    @Test
+    public void testAddToCart(){
+        //Arrange
+        CartController cartController = new CartController();
+        ProductRepository productRepository = mock(ProductRepository.class);
+        HttpSession httpSession = mock(HttpSession.class);
+        HttpServletRequest httpServletRequest = mock(HttpServletRequest.class);
+        Authentication authentication = mock(Authentication.class);
+
+        Product product = new Product();
+        product.setProductName("Test Product");
+        product.setProductDescription("This is a test product");
+        product.setProductPrice(10.00);
+        product.setProductStock(5);
+        product.setId(1);
+        //Act
+        when(productRepository.findById(1)).thenReturn(Optional.of(product));
+
+        int productId = 1;
+        int quantity = 2;
+
+        cartController.addToCart(productId, quantity, httpServletRequest, authentication, httpSession);
+        //Assert
+        verify(httpSession, times(1)).setAttribute(eq("cart"), any(Cart.class));
+    }
+ }
+        
+
 
 
 
