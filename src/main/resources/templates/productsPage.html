@@ -52,7 +52,8 @@
         <div class="row">
             <div class="col-md-4" th:each="product : ${products}">
                 <div class="card mb-4 box-shadow">
-                    <img class="card-img-top" th:src="@{'data:image/png;base64,' + #strings.bytesToBase64(product.imageData)}" alt="Product Image">
+                    
+                    <img class='card-img-top' th:src="'data:image/png;base64,' + ${imgUtil.getImgData(product.imageData)}" />
                     <div class="card-body">
                         <h5 class="card-title" th:text="${product.productName}"></h5>
                         <p class="card-text" th:text="${product.productDescription}"></p>

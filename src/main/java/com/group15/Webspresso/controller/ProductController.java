@@ -1,18 +1,34 @@
 package com.group15.Webspresso.controller;
 
+import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.group15.Webspresso.classes.ImageUtil;
+import com.group15.Webspresso.classes.ProductReportDataSource;
 import com.group15.Webspresso.entity.Product;
 import com.group15.Webspresso.service.ProductService;
 
+import jakarta.servlet.ServletOutputStream;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import net.sf.jasperreports.engine.JRDataSource;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
 
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -46,6 +62,7 @@ public class ProductController {
     @GetMapping("/productsPage")
     public String displayProducts(Model model) {
         model.addAttribute("products", productService.getAllProducts());
+        model.addAttribute("imgUtil", new ImageUtil());
         return "productsPage";
     }
 
@@ -107,4 +124,28 @@ public class ProductController {
         productService.deleteProductById(id);
         return redirectString;
     }
+
+    @GetMapping("/report")
+    public void generateReport(HttpServletResponse response) throws JRException, IOException {
+        // Load the report template from file
+        File reportFile = ResourceUtils.getFile("classpath:product_report.jrxml");
+        JasperReport jasperReport = JasperCompileManager.compileReport(reportFile.getAbsolutePath());
+
+        // Create a data source and fill the report template with data
+        List<Product> productList = productService.getAllProducts();
+        JRDataSource dataSource = new ProductReportDataSource(productList);
+        Map<String, Object> parameters = new HashMap<>();
+        JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dataSource);
+
+        // Export the report to PDF and send it as a response to the client
+        byte[] reportBytes = JasperExportManager.exportReportToPdf(jasperPrint);
+        response.setContentType("application/pdf");
+        response.setContentLength(reportBytes.length);
+        response.setHeader("Content-Disposition", "inline; filename=product_report.pdf");
+        ServletOutputStream outputStream = response.getOutputStream();
+        outputStream.write(reportBytes);
+        outputStream.flush();
+        outputStream.close();
+    }
+
 }

@@ -1,5 +1,7 @@
 package com.group15.Webspresso.entity;
 
+import java.util.Base64;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -84,6 +86,10 @@ public class Product {
 
     public void setImageData(byte[] imageData) {
         this.imageData = imageData;
+    }
+
+    public String getImageAsByte64() {
+        return Base64.getEncoder().encodeToString(imageData);
     }
 
     
