@@ -33,11 +33,22 @@
             </ul>
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
+                    <form class="form-inline" th:action="@{/products}" method="get">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Search products" name="searchText">
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" type="submit">Search</button>
+                            </div>
+                        </div>
+                    </form>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" th:href="@{/adminLogout}">Log Out</a>
                 </li>
             </ul>
         </div>
     </nav>
+
 
     <div class = "container">
         <div class = "row">

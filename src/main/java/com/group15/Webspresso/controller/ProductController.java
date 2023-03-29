@@ -48,10 +48,11 @@ public class ProductController {
 
     // handler method to handle list students and return model and view
     @GetMapping("/products")
-    public String listProducts(Model model, HttpSession session) {
+    public String listProducts(Model model, HttpSession session, @RequestParam(value = "searchText", required = false) String searchText) {
         String sessionType = (String) session.getAttribute("sessionType");
         if(sessionType != null && sessionType.equals("admin")){
-            model.addAttribute("products", productService.getAllProducts());
+            List<Product> products = productService.getProducts(searchText);
+            model.addAttribute("products", products);
             model.addAttribute("imgUtil", new ImageUtil());
             return "products";
         } else {

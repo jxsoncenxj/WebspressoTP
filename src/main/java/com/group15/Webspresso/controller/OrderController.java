@@ -139,8 +139,8 @@ public class OrderController {
 
     // handler method to display all orders
     @GetMapping("/orders")
-    public String listOrders(Model model) {
-        model.addAttribute("orders", orderService.getAllOrders());
+    public String listOrders(Model model, @RequestParam(value = "status", required = false) String status) {
+        model.addAttribute("orders", orderService.getOrders(status));
         return "orders";
     }
 

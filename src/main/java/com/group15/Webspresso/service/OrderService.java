@@ -14,4 +14,6 @@ public interface OrderService {
 
     Order updateOrder(Order order);
 
+    Object getOrders(String status);
+
 }

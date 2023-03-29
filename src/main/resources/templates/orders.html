@@ -38,35 +38,56 @@
             </ul>
         </div>
     </nav>
-
-    <div class = "container">
-            <div class = "row">
-                <h1> List Orders </h1>
+<br>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-4">
+            <form th:action="@{/orders}" method="get">
+                <div class="form-group">
+                    <label for="status">Filter by status:</label>
+                    <select class="form-control" id="status" name="status">
+                        <option value="">All</option>
+                        <option value="RECIEVED">Recieved</option>
+                        <option value="SHIPPED">Shipped</option>
+                        <option value="DELIVERED">Delivered</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Filter</button>
+            </form>
+        </div>
+        <div class="col-lg-8">
+            <div class="row">
+                <div class="col">
+                    <h1>List Orders</h1>
+                </div>
             </div>
-        <table class= "table table-bordered table-striped">
-            <thead class = "thead-dark">
-                <tr>
-                    <th>Order ID</th>
-                    <th>Order Status</th>
-                    <th>Total Price</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
+            <table class="table table-bordered table-striped">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Order ID</th>
+                        <th>Order Status</th>
+                        <th>Total Price</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
 
-            <tbody>
-                <tr th:each = "order : ${orders}">
-                    <td th:text = "${order.getId()}"></td>
-                    <td th:text = "${order.getOrderStatus()}"></td>
-                    <td th:text = "${order.getTotalPrice()}"></td>
-                    <td>
-                        <a 
-                        class = "btn btn-primary" th:href="@{/orders/summary/{id}(id=${order.id})}">Summary</a>
-                        <a
-                        class="btn btn-primary" th:href="@{/orders/edit/{id}(id=${order.getId()})}">Change Order Info</a>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+                <tbody>
+                    <tr th:each="order : ${orders}">
+                        <td th:text="${order.getId()}"></td>
+                        <td th:text="${order.getOrderStatus()}"></td>
+                        <td th:text="${order.getTotalPrice()}"></td>
+                        <td>
+                            <a class="btn btn-primary"
+                                th:href="@{/orders/summary/{id}(id=${order.id})}">Summary</a>
+                            <a class="btn btn-primary"
+                                th:href="@{/orders/edit/{id}(id=${order.getId()})}">Change Order Info</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
+</div>
+
 </body>
 </html>
