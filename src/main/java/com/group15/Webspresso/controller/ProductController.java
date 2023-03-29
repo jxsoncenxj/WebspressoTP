@@ -135,27 +135,5 @@ public class ProductController {
         return redirectString;
     }
 
-    @GetMapping("/report")
-    public void generateReport(HttpServletResponse response) throws JRException, IOException {
-        // Load the report template from file
-        File reportFile = ResourceUtils.getFile("classpath:product_report.jrxml");
-        JasperReport jasperReport = JasperCompileManager.compileReport(reportFile.getAbsolutePath());
-
-        // Create a data source and fill the report template with data
-        List<Product> productList = productService.getAllProducts();
-        JRDataSource dataSource = new ProductReportDataSource(productList);
-        Map<String, Object> parameters = new HashMap<>();
-        JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dataSource);
-
-        // Export the report to PDF and send it as a response to the client
-        byte[] reportBytes = JasperExportManager.exportReportToPdf(jasperPrint);
-        response.setContentType("application/pdf");
-        response.setContentLength(reportBytes.length);
-        response.setHeader("Content-Disposition", "inline; filename=product_report.pdf");
-        ServletOutputStream outputStream = response.getOutputStream();
-        outputStream.write(reportBytes);
-        outputStream.flush();
-        outputStream.close();
-    }
 
 }

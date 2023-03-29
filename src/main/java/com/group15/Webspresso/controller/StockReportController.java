@@ -1,29 +1,53 @@
-// package com.group15.Webspresso.controller;
+package com.group15.Webspresso.controller;
 
-// import javax.sql.DataSource;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
-// import org.springframework.beans.factory.annotation.Autowired;
-// import org.springframework.web.bind.annotation.GetMapping;
-// import org.springframework.web.bind.annotation.RestController;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-// import jakarta.servlet.http.HttpServletResponse;
+import com.group15.Webspresso.repository.ProductRepository;
+import com.group15.Webspresso.service.impl.ReportServiceImpl;
 
-// @RestController
-// public class StockReportController {
+import jakarta.servlet.http.HttpServletResponse;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperPrint;
 
-//     @Autowired
-//     private DataSource dataSource;
+@RestController
+public class StockReportController {
 
-//     @GetMapping("/stockReport")
-//     public void generateStockReport(HttpServletResponse response) throws JRException, IOException {
-//         // Load the JasperReports template from the classpath
-//         InputStream inputStream = this.getClass().getResourceAsStream("/jasper/stockReport.jrxml");
+    @Autowired
+    ProductRepository productRepository;
 
-//         // Compile the JasperReports template into a JasperReport object
-//         JasperReport jasperReport = JasperCompileManager.compileReport(inputStream);
+    @Autowired
+    ReportServiceImpl reportService;
 
-//         // Fetch the data from
+    @GetMapping("/productReport")
+    public void generatProductReport(HttpServletResponse response) throws JRException, IOException{
+        // Generate the report
+        JasperPrint jasperPrint = reportService.exportProductReport();
 
-//     }
+        // Set the response headers
+        response.setContentType("application/pdf");
+        response.setHeader("Content-Disposition", "inline; filename=orderReport.pdf");
 
-// }
+        // Export the report to the response output stream
+        JasperExportManager.exportReportToPdfStream(jasperPrint, response.getOutputStream());
+    }
+
+    @GetMapping("/orderReport")
+    public void generateOrderReport(HttpServletResponse response) throws JRException, IOException {
+        // Generate the report
+        JasperPrint jasperPrint = reportService.exportOrdersReport();
+
+        // Set the response headers
+        response.setContentType("application/pdf");
+        response.setHeader("Content-Disposition", "inline; filename=orderReport.pdf");
+
+        // Export the report to the response output stream
+        JasperExportManager.exportReportToPdfStream(jasperPrint, response.getOutputStream());
+    }
+
+}
