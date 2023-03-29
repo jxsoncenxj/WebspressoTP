@@ -165,6 +165,7 @@ public class OrderController {
     @GetMapping("/orders/summary/{id}")
     public String orderSummary(@PathVariable Long id, Model model){
         model.addAttribute("order", orderService.getOrderByID(id));
+        model.addAttribute("imgUtil", new ImageUtil());
         return "order_summary";
     }
 
