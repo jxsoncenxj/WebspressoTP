@@ -67,6 +67,14 @@ public class ProductController {
         return "productsPage";
     }
 
+    //handeler method to display individual product page
+    @GetMapping("/product/{id}")
+    public String displayProducts(@PathVariable int id, Model model) {
+        model.addAttribute("product", productService.getProductById(id));
+        model.addAttribute("imgUtil", new ImageUtil());
+        return "product.html";
+    }
+
     @GetMapping("/products/new")
     public String createProductForm(Model model) {
         //create product object to hold product form data
