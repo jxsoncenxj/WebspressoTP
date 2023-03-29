@@ -12,7 +12,7 @@
   <nav class="navbar navbar-expand-md bg-dark navbar-dark">
       <!-- Brand -->
       <a class="navbar-brand" th:href="@{/userDashboard/{userId}(userId=${userId})}">User Dashboard</a>
-
+      <a class="navbar-text" href="/">Homepage</a>
 
 
       <!-- Toggler/collapsibe Button -->
@@ -51,7 +51,7 @@
                 <td th:text = "${order.getTotalPrice()}"></td>
                 <td>
                     <a 
-                    class = "btn btn-primary">More Info</a>
+                    class = "btn btn-primary" th:href="@{/userOrders/summary/{id}(id=${order.id})}">Summary</a>
                 </td>
             </tr>
         </tbody>
