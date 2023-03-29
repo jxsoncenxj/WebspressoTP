@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Product Page</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+<!-- Navigation Bar -->
+<section id="header">
+    <img
+            th:src="@{/images/logo.png}"
+            width="auto"
+            height="80"
+            class="logo d-inline-block align-top rounded-circle"
+            alt=""
+     />
+
+    <div>
+        <ul id="navbar">
+
+            <li><a class="active"th:href="@{/}">Home</a></li>
+            <li>
+                <a href="productsPage">Shop</a>
+                <ul class="dropdown">
+                    <li><a href="#">Machines</a></li>
+                    <li><a href="#">Syrups</a></li>
+                    <li><a href="#">Coffee</a></li>
+                    <li><a href="#">Accessories</a></li>
+                    <li><a href="#">Mugs</a></li>
+                </ul>
+            </li>
+            <li><a href="login2">My Account</a></li>
+            <li><a href="aboutus">About</a></li>
+            <li><a href="#form-details">Contact</a></li>
+            <li id="admin"><a href="adminLogin">Admin</a></li>
+            <li id="lg-bag"><a href="cart"><i class="far fa-shopping-bag"></i></a></li>
+
+            <a href="#" id="close"><i class="far fa-times"></i></a>
+        </ul>
+    </div>
+    <div id="mobile">
+        <a href="cart.html"><i class="far fa-shopping-bag"></i></a>
+        <i id="bar" class="fas fa-outdent"></i>
+    </div>
+</section>
+
+<div class="container">
+    <h1>Product Details</h1>
+    <table class="table">
+        <tbody>
+        <tr>
+            <td>Name:</td>
+            <td th:text="${product.name}"></td>
+        </tr>
+        <tr>
+            <td>Description:</td>
+            <td th:text="${product.description}"></td>
+        </tr>
+        <tr>
+            <td>Price:</td>
+            <td th:text="${product.price}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
