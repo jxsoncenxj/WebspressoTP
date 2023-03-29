@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.group15.Webspresso.classes.ImageUtil;
 import com.group15.Webspresso.classes.OrderStatus;
 import com.group15.Webspresso.entity.Cart;
 import com.group15.Webspresso.entity.CartItem;
@@ -132,6 +133,7 @@ public class OrderController {
         Long orderId = (Long) session.getAttribute("orderId");
         Order order = orderService.getOrderByID(orderId);
         model.addAttribute("order", order);
+        model.addAttribute("imgUtil", new ImageUtil());
         return "order-confirmation";
     }
 
@@ -164,5 +166,13 @@ public class OrderController {
     public String orderSummary(@PathVariable Long id, Model model){
         model.addAttribute("order", orderService.getOrderByID(id));
         return "order_summary";
+    }
+
+    //handler method to display order summary for customer
+    @GetMapping("/userOrders/summary/{id}")
+    public String customerOrderSummary(@PathVariable Long id, Model model) {
+        model.addAttribute("order", orderService.getOrderByID(id));
+        model.addAttribute("imgUtil", new ImageUtil());
+        return "customer-order-summary";
     }
 }   

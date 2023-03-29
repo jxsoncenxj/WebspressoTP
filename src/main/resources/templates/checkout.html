@@ -49,6 +49,7 @@
     <table class="table">
       <thead>
         <tr>
+          <th>Product Image</th>
           <th>Product Name</th>
           <th>Price</th>
           <th>Quantity</th>
@@ -57,6 +58,10 @@
       </thead>
       <tbody>
         <tr th:each="cartItem : ${cartItems}">
+          <td>
+              <img th:src="'data:image/png;base64,' + ${imgUtil.getImgData(cartItem.product.imageData)}" 
+              width="75" height="50" />
+          </td>
           <td th:text="${cartItem.product.productName}"></td>
           <td th:text="${cartItem.product.productPrice}"></td>
           <td th:text="${cartItem.quantity}"></td>
