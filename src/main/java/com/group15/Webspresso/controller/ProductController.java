@@ -52,6 +52,7 @@ public class ProductController {
         String sessionType = (String) session.getAttribute("sessionType");
         if(sessionType != null && sessionType.equals("admin")){
             model.addAttribute("products", productService.getAllProducts());
+            model.addAttribute("imgUtil", new ImageUtil());
             return "products";
         } else {
             return "redirect:/adminLogin";
