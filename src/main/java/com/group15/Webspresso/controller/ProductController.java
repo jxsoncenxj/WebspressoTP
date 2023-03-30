@@ -76,9 +76,9 @@ public class ProductController {
     //handeler method to display individual product page
     @GetMapping("/product/{id}")
     public String displayProducts(@PathVariable int id, Model model) {
-        model.addAttribute("products", productService.getProductById(id));
+        model.addAttribute("product", productService.getProductById(id));
         model.addAttribute("imgUtil", new ImageUtil());
-        return "product.html";
+        return "product";
     }
 
     @GetMapping("/product/origin/{origin}")

@@ -166,7 +166,7 @@ public class OrderController {
     public String orderSummary(@PathVariable Long id, Model model){
         model.addAttribute("order", orderService.getOrderByID(id));
         model.addAttribute("imgUtil", new ImageUtil());
-        return "order_summary";
+        return "order-summary";
     }
 
     //handler method to display order summary for customer

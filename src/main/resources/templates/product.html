@@ -51,47 +51,52 @@
       </section>
 
 <div class="container">
-    <h1 class="mt-5">Product Details</h1>
-    <img th:src="'data:image/png;base64,' + ${imgUtil.getImgData(product.imageData)}"
-         width="auto"
-            height="80"
-            class="img-fluid rounded"
-            alt=""
-    />
-    <table class="table">
+  <h1 class="mt-5">Product Details</h1>
+  <div class="row">
+    <div class="col-md-4">
+      <img th:src="'data:image/png;base64,' + ${imgUtil.getImgData(product.imageData)}"
+           width="auto"
+           class="img-fluid rounded"
+           alt=""
+      />
+    </div>
+    <div class="col-md-8">
+      <table class="table">
         <tbody>
-        <tr>
+          <tr>
             <td>Name:</td>
             <td th:text="${product.productName}"></td>
-        </tr>
-        <tr>
+          </tr>
+          <tr>
             <td>Description:</td>
             <td th:text="${product.productDescription}"></td>
-        </tr>
-        <tr>
+          </tr>
+          <tr>
             <td>Price:</td>
             <td th:text="'£' + ${product.productPrice}">></td>
-        </tr>
+          </tr>
         </tbody>
-    </table>
-    <form method="post" th:action="@{/cart/add}">
+      </table>
+      <form method="post" th:action="@{/cart/add}">
         <input type="hidden" name="productId" th:value="${product.id}" />
         <div class="form-group">
-            <label for="quantity">Quantity:</label>
-            <input type="number" class="form-control" id="quantity" name="quantity" min="1" value="1">
+          <label for="quantity">Quantity:</label>
+          <input type="number" class="form-control" id="quantity" name="quantity" min="1" value="1">
         </div>
         <button type="submit" class="btn btn-sm btn-outline-secondary">Add to cart</button>
-    </form>
-</div>
-<!-- Footer -->
-<footer class="">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12 text-center">
-                <p>&copy; Webspresso. All rights reserved.</p>
-            </div>
-        </div>
+      </form>
     </div>
+  </div>
+</div>
+
+<footer class="">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 text-center">
+        <p>&copy; Webspresso. All rights reserved.</p>
+      </div>
+    </div>
+  </div>
 </footer>
 </body>
 </html>
