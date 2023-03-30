@@ -157,10 +157,13 @@ ul li ul.dropdown li {
 
 ul li ul.dropdown {
   width: 250%;
-  background: rgba(175, 169, 169, 0.383);
+  background: rgb(253, 253, 253);
   position: absolute;
-
+  left: 50%;
+    transform: translateX(-50%);
   display: none;
+  z-index: 9999;
+  border-radius: 10px;
 }
 ul li a:hover {
   background: #3e310d90;
@@ -172,6 +175,7 @@ ul li a:hover {
 }
 ul li:hover ul.dropdown {
   display: block;
+
 }
 
 #mobile {

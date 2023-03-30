@@ -62,18 +62,31 @@ public class ProductController {
 
     // handler method to handle list products and return model and view
     @GetMapping("/productsPage")
-    public String displayProducts(Model model) {
-        model.addAttribute("products", productService.getAllProducts());
+    public String displayProducts(@RequestParam(value = "origin", required = false) String origin, Model model) {
+        List<Product> products = productService.getAllProducts();
+        if (origin != null && !origin.isEmpty()) {
+            products = productService.getProductsByOrigin(origin);
+        }
+        model.addAttribute("products", products);
         model.addAttribute("imgUtil", new ImageUtil());
         return "productsPage";
     }
+    
 
     //handeler method to display individual product page
     @GetMapping("/product/{id}")
     public String displayProducts(@PathVariable int id, Model model) {
-        model.addAttribute("product", productService.getProductById(id));
+        model.addAttribute("products", productService.getProductById(id));
         model.addAttribute("imgUtil", new ImageUtil());
         return "product.html";
+    }
+
+    @GetMapping("/product/origin/{origin}")
+    public String displayProductByOrigin(@PathVariable String origin, Model model) {
+        origin = origin.toUpperCase();
+        model.addAttribute("products", productService.getProductsByOrigin(origin));
+        model.addAttribute("imgUtil", new ImageUtil());
+        return "productsByOriginPage";
     }
 
     @GetMapping("/products/new")
@@ -102,32 +115,29 @@ public class ProductController {
     }
 
     @GetMapping("/products/edit/{id}")
-    public String editProductForm(@PathVariable int id, Model model){
-        model.addAttribute("product", productService.getProductById(id));
+    public String editProductForm(@PathVariable int id, Model model) {
+        Product product = productService.getProductById(id);
+        model.addAttribute("product", product);
         return "edit_product";
     }
 
     @PostMapping("/products/{id}")
-    public String updateProduct(@PathVariable int id, @ModelAttribute("product") Product product,
-            @RequestParam("productImage") MultipartFile imageFile, Model model) {
-        Product ogProduct = productService.getProductById(id);
-        ogProduct.setId(id);
-        ogProduct.setProductName(product.getProductName());
-        ogProduct.setProductPrice(product.getProductPrice());
-        ogProduct.setProductDescription(product.getProductDescription());
-        ogProduct.setProductStock(product.getProductStock());
+    public String updateProduct(@PathVariable int id, @ModelAttribute("product") Product updatedProduct,
+            @RequestParam("productImage") MultipartFile imageFile, Model model) throws IOException {
+        Product originalProduct = productService.getProductById(id);
+        originalProduct.setId(id);
+        // Set the updated information on the existing product
+        originalProduct.setProductName(updatedProduct.getProductName());
+        originalProduct.setProductPrice(updatedProduct.getProductPrice());
+        originalProduct.setProductDescription(updatedProduct.getProductDescription());
+        originalProduct.setProductStock(updatedProduct.getProductStock());
+        originalProduct.setOrigin(updatedProduct.getOrigin());
+        originalProduct.setImageData(imageFile.getBytes());
 
-        try {
-            // Set the image data on the product object
-            ogProduct.setImageData(imageFile.getBytes());
-            productService.updateProduct(ogProduct);
-        } catch (IOException e) {
-            e.printStackTrace();
-            return "error";
-        }
-
+        productService.updateProduct(originalProduct);
         return redirectString;
     }
+    
 
     @GetMapping("/products/{id}")
     public String deleteProduct(@PathVariable int id){

@@ -7,6 +7,10 @@
         href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" 
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" 
         crossorigin="anonymous">
+    <link
+      rel="stylesheet"
+      href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+    />
 </head>
 <body>
     <nav class="navbar navbar-expand-md bg-dark navbar-dark">
@@ -61,8 +65,8 @@
                 <a th:href="@{/productReport}" class="btn btn-primary btn-sm mb-3" target="_blank">Generate Report</a>
             </div>
         </div>
-        <table class= "table table-bordered table-striped">
-            <thead class = "thead-dark">
+        <table class="table table-bordered table-striped">
+            <thead class="thead-dark">
                 <tr>
                     <th>Product Image</th>
                     <th>Product Name</th>
@@ -72,26 +76,34 @@
                     <th>Actions</th>
                 </tr>
             </thead>
-
             <tbody>
-                <tr th:each = "product : ${products}">
+                <tr th:each="product : ${products}">
                     <td>
-                        <img th:src="'data:image/png;base64,' + ${imgUtil.getImgData(product.imageData)}" 
-                        width="150" height="100" />
+                        <img th:src="'data:image/png;base64,' + ${imgUtil.getImgData(product.imageData)}" width="150" height="100" />
                     </td>
-                    <td th:text = "${product.productName}"></td>
-                    <td th:text = "${product.productPrice}"></td>
-                    <td th:text = "${product.productDescription}"></td>
-                    <td th:text = "${product.productStock}"></td>
+                    <td th:text="${product.productName}"></td>
+                    <td th:text="${product.productPrice}"></td>
+                    <td th:text="${product.productDescription}"></td>
                     <td>
-                        <a th:href="@{/products/edit/{id}(id=${product.id})}"
-                        class = "btn btn-primary">Edit</a>
-                        <a th:href="@{/products/{id}(id=${product.id})}"
-                        class = "btn btn-danger">Delete</a>
+                        <script th:if="${product.productStock < 50}">
+                            alert('Product is low in stock!');
+                        </script>
+                        <span th:text="${product.productStock}" th:style="${product.productStock < 50 ? 'color: red;' : ''}"></span>
+                        <br/>
+                        <span th:text="'Low stock'" 
+                            th:style="${product.productStock < 50 ? 'color: red;' : ''}"
+                            th:if="${product.productStock < 50}"></span>
+                    </td>
+
+                    <td>
+                        <a th:href="@{/products/edit/{id}(id=${product.id})}" class="btn btn-primary">Edit</a>
+                        <a th:href="@{/products/{id}(id=${product.id})}" class="btn btn-danger">Delete</a>
                     </td>
                 </tr>
             </tbody>
         </table>
+
+
     </div>    
 </body>
 </html>

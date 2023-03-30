@@ -9,5 +9,7 @@ import com.group15.Webspresso.entity.Product;
 public interface ProductRepository extends JpaRepository <Product, Integer> {
 
     List<Product> findByProductNameContaining(String searchText);
+
+    List<Product> findByOrigin(String origin);
     
 }

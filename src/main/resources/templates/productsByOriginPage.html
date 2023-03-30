@@ -5,13 +5,13 @@
     <title>Products</title>
     <link rel="stylesheet" th:href="@{/css/style.css}" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <link
+        <link
       rel="stylesheet"
       href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
     />
 </head>
 <body>
-     <section id="header">
+    <section id="header">
       <img
             th:src="@{/images/logo.png}"
             width="auto"
@@ -53,23 +53,6 @@
         <div class="row">
             <div class="col-md-12">
                 <h1 class="text-center mb-5">Our Products</h1>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12 mb-5">
-            <form action="#" method="get" th:action="@{/productsPage}">
-                <select name="origin" class="form-control">
-                    <option value="">All Origins</option>
-                    <option value="ETHIOPIA">Ethiopia</option>
-                    <option value="KENYA" >Kenya</option>
-                    <option value="BRAZIL" >Brazil</option>
-                    <option value="COLOMBIA" >Colombia</option>
-                    <option value="CENTRALAMERICA">Central America</option>
-                </select>
-                <input type="hidden" name="defaultOrigin"/>
-                <button type="submit" class="btn btn-primary mt-3 btn-outline-secondary" >Filter</button>
-            </form>
-
             </div>
         </div>
         <div class="row">

@@ -5,8 +5,49 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Order Confirmation</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <link
+      rel="stylesheet"
+      href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+  />
 </head>
 <body>
+  <section id="header">
+  <img
+        th:src="@{/images/logo.png}"
+        width="auto"
+        height="80"
+        class="logo d-inline-block align-top rounded-circle"
+        alt=""
+    />
+
+      <div>
+          <ul id="navbar">
+              
+              <li><a class="active"th:href="@{/}">Home</a></li>
+              <li>
+                  <a href="productsPage">Shop</a>
+                  <ul class="dropdown">
+                      <li><a th:href="@{/product/origin/ethiopia}"}>Ethiopia</a></li>
+                      <li><a th:href="@{/product/origin/kenya}">Kenya</a></li>
+                      <li><a th:href="@{/product/origin/brazil}">Brazil</a></li>
+                      <li><a th:href="@{/product/origin/colombia}">Colombia</a></li>
+                      <li><a th:href="@{/product/origin/centralamerica}">Central America</a></li>
+                  </ul>
+              </li>
+              <li><a href="login2">My Account</a></li>
+              <li><a href="aboutus">About</a></li>
+              <li><a href="#form-details">Contact</a></li>
+              <li id="admin"><a href="adminLogin">Admin</a></li>
+              <li id="lg-bag"><a href="cart"><i class="far fa-shopping-bag"></i></a></li>
+              
+              <a href="#" id="close"><i class="far fa-times"></i></a>
+          </ul>
+      </div>
+      <div id="mobile">
+          <a href="cart.html"><i class="far fa-shopping-bag"></i></a>
+          <i id="bar" class="fas fa-outdent"></i>
+      </div>
+  </section>
   <div class="container mt-5">
     <h1>Order Summary</h1>
     <hr>

@@ -53,4 +53,10 @@ public class ProductServiceImpl implements ProductService {
             return productRepository.findAll();
         }
     }
+
+    @Override
+    public List<Product> getProductsByOrigin(String origin) {
+        return productRepository.findByOrigin(origin);
+    }
+
 }

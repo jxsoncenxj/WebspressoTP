@@ -12,46 +12,46 @@
 </head>
 <body>
 <!-- Navigation Bar -->
-<section id="header">
-    <img
+    <section id="header">
+      <img
             th:src="@{/images/logo.png}"
             width="auto"
             height="80"
             class="logo d-inline-block align-top rounded-circle"
             alt=""
-     />
-
-    <div>
-        <ul id="navbar">
-
-            <li><a class="active"th:href="@{/}">Home</a></li>
-            <li>
-                <a href="productsPage">Shop</a>
-                <ul class="dropdown">
-                    <li><a href="#">Machines</a></li>
-                    <li><a href="#">Syrups</a></li>
-                    <li><a href="#">Coffee</a></li>
-                    <li><a href="#">Accessories</a></li>
-                    <li><a href="#">Mugs</a></li>
-                </ul>
-            </li>
-            <li><a href="login2">My Account</a></li>
-            <li><a href="aboutus">About</a></li>
-            <li><a href="#form-details">Contact</a></li>
-            <li id="admin"><a href="adminLogin">Admin</a></li>
-            <li id="lg-bag"><a href="cart"><i class="far fa-shopping-bag"></i></a></li>
-
-            <a href="#" id="close"><i class="far fa-times"></i></a>
-        </ul>
-    </div>
-    <div id="mobile">
-        <a href="cart.html"><i class="far fa-shopping-bag"></i></a>
-        <i id="bar" class="fas fa-outdent"></i>
-    </div>
-</section>
+        />
+  
+          <div>
+              <ul id="navbar">
+                  
+                  <li><a class="active"th:href="@{/}">Home</a></li>
+                  <li>
+                      <a href="productsPage">Shop</a>
+                      <ul class="dropdown">
+                          <li><a th:href="@{/product/origin/ethiopia}"}>Ethiopia</a></li>
+                          <li><a th:href="@{/product/origin/kenya}">Kenya</a></li>
+                          <li><a th:href="@{/product/origin/brazil}">Brazil</a></li>
+                          <li><a th:href="@{/product/origin/colombia}">Colombia</a></li>
+                          <li><a th:href="@{/product/origin/centralamerica}">Central America</a></li>
+                      </ul>
+                  </li>
+                  <li><a href="login2">My Account</a></li>
+                  <li><a href="aboutus">About</a></li>
+                  <li><a href="#form-details">Contact</a></li>
+                  <li id="admin"><a href="adminLogin">Admin</a></li>
+                  <li id="lg-bag"><a href="cart"><i class="far fa-shopping-bag"></i></a></li>
+                  
+                  <a href="#" id="close"><i class="far fa-times"></i></a>
+              </ul>
+          </div>
+          <div id="mobile">
+              <a href="cart.html"><i class="far fa-shopping-bag"></i></a>
+              <i id="bar" class="fas fa-outdent"></i>
+          </div>
+      </section>
 
 <div class="container">
-    <h1>Product Details</h1>
+    <h1 class="mt-5">Product Details</h1>
     <img th:src="'data:image/png;base64,' + ${imgUtil.getImgData(product.imageData)}"
          width="auto"
             height="80"
@@ -70,10 +70,18 @@
         </tr>
         <tr>
             <td>Price:</td>
-            <td th:text="${product.productPrice}"></td>
+            <td th:text="'£' + ${product.productPrice}">></td>
         </tr>
         </tbody>
     </table>
+    <form method="post" th:action="@{/cart/add}">
+        <input type="hidden" name="productId" th:value="${product.id}" />
+        <div class="form-group">
+            <label for="quantity">Quantity:</label>
+            <input type="number" class="form-control" id="quantity" name="quantity" min="1" value="1">
+        </div>
+        <button type="submit" class="btn btn-sm btn-outline-secondary">Add to cart</button>
+    </form>
 </div>
 <!-- Footer -->
 <footer class="">

@@ -2,6 +2,7 @@ package com.group15.Webspresso.entity;
 
 import java.util.Base64;
 
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -30,6 +31,9 @@ public class Product {
     @Column(name = "product_stock")
     private int productStock;
 
+    @Column(name = "origin")
+    private String origin;
+
     @Lob
     @Column(name = "image_data", length = Integer.MAX_VALUE, nullable = true)
     private byte[] imageData;
@@ -38,13 +42,15 @@ public class Product {
 
     }
 
-    public Product(int id, String productName, Double productPrice, String productDescription, int productStock) {
+    public Product(int id, String productName, Double productPrice, String productDescription, int productStock, String origin, byte[] imageData) {
         super();
         this.id = id;
         this.productName = productName;
         this.productPrice = productPrice;
         this.productDescription = productDescription;
         this.productStock = productStock;
+        this.origin = origin;
+        this.imageData = imageData;
     }
     
     public int getId() {
@@ -92,6 +98,15 @@ public class Product {
         return Base64.getEncoder().encodeToString(imageData);
     }
 
+    public String getOrigin() {
+        return origin;
+    }
+
+    public void setOrigin(String origin) {
+        this.origin = origin;
+    }
+
+    
     
 
 }
