@@ -13,3 +13,5 @@ The login for the admin is...
 username: admin
 
 password: password
+
+(./WebspressoTP/src/main/resources/static/images/img/Homepage.png)
