@@ -75,7 +75,7 @@ public class MainController {
 
   @GetMapping(value = "/aboutus")
   public String aboutus() {
-    return "aboutus";
+    return "aboutUs";
   }
 
 

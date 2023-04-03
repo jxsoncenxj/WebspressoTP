@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Products</title>
     <link rel="stylesheet" th:href="@{/css/style.css}" />
+    <link rel="shortcut icon" href="../favicon/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
         <link
       rel="stylesheet"
@@ -11,7 +12,7 @@
     />
 </head>
 <body>
-    <section id="header">
+     <section id="header">
       <img
             th:src="@{/images/logo.png}"
             width="auto"
@@ -25,7 +26,7 @@
                   
                   <li><a class="active"th:href="@{/}">Home</a></li>
                   <li>
-                      <a href="productsPage">Shop</a>
+                      <a th:href="@{productsPage}">Shop</a>
                       <ul class="dropdown">
                           <li><a th:href="@{/product/origin/ethiopia}"}>Ethiopia</a></li>
                           <li><a th:href="@{/product/origin/kenya}">Kenya</a></li>
@@ -34,11 +35,11 @@
                           <li><a th:href="@{/product/origin/centralamerica}">Central America</a></li>
                       </ul>
                   </li>
-                  <li><a href="login2">My Account</a></li>
-                  <li><a href="aboutus">About</a></li>
+                  <li><a th:href="@{/login2}">My Account</a></li>
+                  <li><a th:href="@{/aboutus}">About</a></li>
                   <li><a href="#form-details">Contact</a></li>
-                  <li id="admin"><a href="adminLogin">Admin</a></li>
-                  <li id="lg-bag"><a href="cart"><i class="far fa-shopping-bag"></i></a></li>
+                  <li id="admin"><a th:href="@{adminLogin}">Admin</a></li>
+                  <li id="lg-bag"><a th:href="@{/cart}"><i class="far fa-shopping-bag"></i></a></li>
                   
                   <a href="#" id="close"><i class="far fa-times"></i></a>
               </ul>
@@ -56,13 +57,29 @@
             </div>
         </div>
         <div class="row">
+            <div class="col-md-12 mb-5">
+            <form action="#" method="get" th:action="@{/productsPage}">
+                <select name="origin" class="form-control">
+                    <option value="">All Origins</option>
+                    <option value="ETHIOPIA">Ethiopia</option>
+                    <option value="KENYA" >Kenya</option>
+                    <option value="BRAZIL" >Brazil</option>
+                    <option value="COLOMBIA" >Colombia</option>
+                    <option value="CENTRALAMERICA">Central America</option>
+                </select>
+                <input type="hidden" name="defaultOrigin"/>
+                <button type="submit" class="btn btn-primary mt-3 btn-outline-secondary" >Filter</button>
+            </form>
+
+            </div>
+        </div>
+        <div class="row">
             <div class="col-md-4" th:each="product : ${products}">
                     <div class="card mb-4 box-shadow">
                         <img class='card-img-top' th:src="'data:image/png;base64,' + ${imgUtil.getImgData(product.imageData)}" />
                         <div class="card-body">
                             <a th:href="@{/product/{id}(id=${product.id})}">
                             <h5 class="card-title" th:text="${product.productName}"></h5>
-                            <p class="card-text" th:text="${product.productDescription}"></p>
                             </a>
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="btn-group">
