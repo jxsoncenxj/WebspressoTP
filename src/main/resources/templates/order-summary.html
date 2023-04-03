@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="eng" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>Order Summary</title>
+    <link rel="stylesheet" 
+        href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" 
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" 
+        crossorigin="anonymous">
+        
+</head>
+<body>
+    <nav class="navbar navbar-expand-md bg-dark navbar-dark">
+        <!-- Brand -->
+        <a class="navbar-brand" th:href="@{/products}">Inventory Management System</a>
+
+        <!-- Toggler/collapsibe Button -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Navbar links -->
+        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/products}">Products</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/users}">Users</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/orders}">Orders</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/adminLogout}">Log Out</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+        <div class="container mt-5">
+        <h1>Order Summary</h1>
+        <hr>
+        <div class="row">
+        <div class="col-md-6">
+            <h4>Order Details</h4>
+            <p>Order ID: <span th:text="${order.id}"></span></p>
+            <p>Order Date: <span th:text="${order.orderDate}"></span></p>
+            <p>First Name: <span th:text="${order.firstName}"></span></p>
+            <p>Last Name: <span th:text="${order.lastName}"></span></p>
+            <p>Address: <span th:text="${order.address}"></span></p>
+            <p>City: <span th:text="${order.city}"></span></p>
+            <p>County: <span th:text="${order.county}"></span></p>
+            <p>Postcode: <span th:text="${order.postcode}"></span></p>
+        </div>
+        <div class="col-md-6">
+            <h4>Payment Details</h4>
+            <p>Card Number: <span th:text="${order.cardNumber}"></span></p>
+            <p>Expiration: <span th:text="${order.expiryDate}"></span></p>
+            <p>CVV: <span th:text="${order.cvv}"></span></p>
+        </div>
+        </div>
+        <hr>
+        <h4>Order Items</h4>
+        <table class="table">
+        <thead>
+            <tr>
+            <th>Product Image</th>
+            <th>Product Name</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Total Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="orderItem : ${order.orderItems}">
+            <td>
+                <img th:src="'data:image/png;base64,' + ${imgUtil.getImgData(orderItem.product.imageData)}" 
+                width="75" height="50" />
+            </td>
+            <td th:text="${orderItem.product.productName}"></td>
+            <td th:text="${orderItem.price}"></td>
+            <td th:text="${orderItem.quantity}"></td>
+            <td th:text="${orderItem.price * orderItem.quantity}"></td>
+            </tr>
+        </tbody>
+        </table>
+    </div>
+
+</body>
+</html>

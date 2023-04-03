@@ -1,0 +1,30 @@
+.row {
+    margin: 0;
+}
+
+.col-md-6 {
+    padding: 0 10px;
+}
+
+.table {
+    margin-bottom: 0;
+}
+
+.form-control {
+    height: calc(1.5em + .75rem + 2px);
+}
+
+.btn-primary {
+    margin-top: 20px;
+    width: 100%;
+}
+
+.summary {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.form-container {
+    display: inline-block;
+    vertical-align: middle;
+}

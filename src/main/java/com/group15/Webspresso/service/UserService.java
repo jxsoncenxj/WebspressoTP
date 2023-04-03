@@ -2,9 +2,11 @@ package com.group15.Webspresso.service;
 
 import java.util.List;
 
+import org.springframework.security.core.userdetails.UserDetailsService;
+
 import com.group15.Webspresso.entity.User;
 
-public interface UserService {
+public interface UserService extends UserDetailsService{
 
     List<User> getAllUsers();
 
@@ -19,4 +21,9 @@ public interface UserService {
     User findByUsernameAndPassword(String email, String password);
 
     void save(User user);
+
+    User findByUsername(String email);
+
+    boolean checkPassword(String password, String hashed);
+
 }

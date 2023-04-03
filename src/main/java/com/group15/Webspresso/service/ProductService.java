@@ -15,4 +15,9 @@ public interface ProductService {
     Product updateProduct(Product product);
 
     void deleteProductById(int id);
+
+    List<Product> getProducts(String searchText);
+
+    List<Product> getProductsByOrigin(String origin);
+
 }

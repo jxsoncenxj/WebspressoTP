@@ -42,20 +42,22 @@
           <div>
               <ul id="navbar">
                   
-                  <li><a class="active" href="index.html">Home</a></li>
+                  <li><a class="active"th:href="@{/}">Home</a></li>
                   <li>
-                      <a href="">Shop</a>
+                      <a href="productsPage">Shop</a>
                       <ul class="dropdown">
-                          <li><a href="#">Machines</a></li>
-                          <li><a href="#">Beans</a></li>
-                          <li><a href="#">Coffee</a></li>
+                          <li><a th:href="@{/product/origin/ethiopia}"}>Ethiopia</a></li>
+                          <li><a th:href="@{/product/origin/kenya}">Kenya</a></li>
+                          <li><a th:href="@{/product/origin/brazil}">Brazil</a></li>
+                          <li><a th:href="@{/product/origin/colombia}">Colombia</a></li>
+                          <li><a th:href="@{/product/origin/centralamerica}">Central America</a></li>
                       </ul>
                   </li>
                   <li><a href="login2">My Account</a></li>
-                  <li><a href="">About</a></li>
+                  <li><a href="aboutus">About</a></li>
                   <li><a href="#form-details">Contact</a></li>
-                  <li id="admin"><a href="products">Admin</a></li>
-                  <li id="lg-bag"><a href="cart.html"><i class="far fa-shopping-bag"></i></a></li>
+                  <li id="admin"><a href="adminLogin">Admin</a></li>
+                  <li id="lg-bag"><a href="cart"><i class="far fa-shopping-bag"></i></a></li>
                   
                   <a href="#" id="close"><i class="far fa-times"></i></a>
               </ul>
@@ -73,7 +75,9 @@
       <h2>Discover the taste of real coffee.</h2>
       <h1>Delivered to your door step.</h1>
       <div class="text-center">
-        <button class="normal">Browse Products</button>
+        <a th:href="@{/productsPage}">
+          <button class="normal">Browse Products</button> 
+        </a>
       </div>
     </section>
 

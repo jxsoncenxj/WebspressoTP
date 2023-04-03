@@ -44,4 +44,19 @@ public class ProductServiceImpl implements ProductService {
     public void deleteProductById(int id) {
         productRepository.deleteById(id);
     }
+
+    @Override
+    public List<Product> getProducts(String searchText) {
+        if (searchText != null && !searchText.isEmpty()) {
+            return productRepository.findByProductNameContaining(searchText);
+        } else {
+            return productRepository.findAll();
+        }
+    }
+
+    @Override
+    public List<Product> getProductsByOrigin(String origin) {
+        return productRepository.findByOrigin(origin);
+    }
+
 }

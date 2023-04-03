@@ -4,43 +4,58 @@
     <title>Login</title>
     <link rel="stylesheet" href="../css/log.css">
     <link rel="stylesheet" href="../css/style.css">
+    <link
+      rel="stylesheet"
+      href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+    />
 </head>
 <body>
     <section id="header">
-        <a href="logo"><img th:src="@{/images/logo.png}" class="logo" alt=""></a>
-
-        <div>
-            <ul id="navbar">
-                
-                <li><a class="active" href="index.html">Home</a></li>
-                <li>
-                    <a href="">Shop</a>
-                    <ul class="dropdown">
-                        <li><a href="#">Machines</a></li>
-                        <li><a href="#">Beans</a></li>
-                        <li><a href="#">Coffee</a></li>
-                    </ul>
-                </li>
-                <li><a href="login2">My Account</a></li>
-                <li><a href="">About</a></li>
-                <li><a href="#form-details">Contact</a></li>
-                <li id="admin"><a href="products">Admin</a></li>
-                <li id="lg-bag"><a href="cart.html"><i class="far fa-shopping-bag"></i></a></li>
-                
-                <a href="#" id="close"><i class="far fa-times"></i></a>
-            </ul>
-        </div>
-        <div id="mobile">
-            <a href="cart.html"><i class="far fa-shopping-bag"></i></a>
-            <i id="bar" class="fas fa-outdent"></i>
-        </div>
-    </section>
+      <img
+            th:src="@{/images/logo.png}"
+            width="auto"
+            height="80"
+            class="logo d-inline-block align-top rounded-circle"
+            alt=""
+        />
+  
+          <div>
+              <ul id="navbar">
+                  
+                  <li><a class="active"th:href="@{/}">Home</a></li>
+                  <li>
+                      <a href="productsPage">Shop</a>
+                      <ul class="dropdown">
+                          <li><a th:href="@{/product/origin/ethiopia}"}>Ethiopia</a></li>
+                          <li><a th:href="@{/product/origin/kenya}">Kenya</a></li>
+                          <li><a th:href="@{/product/origin/brazil}">Brazil</a></li>
+                          <li><a th:href="@{/product/origin/colombia}">Colombia</a></li>
+                          <li><a th:href="@{/product/origin/centralamerica}">Central America</a></li>
+                      </ul>
+                  </li>
+                  <li><a href="login2">My Account</a></li>
+                  <li><a href="aboutus">About</a></li>
+                  <li><a href="#form-details">Contact</a></li>
+                  <li id="admin"><a href="adminLogin">Admin</a></li>
+                  <li id="lg-bag"><a href="cart"><i class="far fa-shopping-bag"></i></a></li>
+                  
+                  <a href="#" id="close"><i class="far fa-times"></i></a>
+              </ul>
+          </div>
+          <div id="mobile">
+              <a href="cart.html"><i class="far fa-shopping-bag"></i></a>
+              <i id="bar" class="fas fa-outdent"></i>
+          </div>
+      </section>
     <div class="bg"></div>
     <div class="container">
         <form th:action="@{/login2}" method="post">
             <h1>Login</h1>
             <div th:if="${error}">
                 <p th:text="${error}" style="color: red;"></p>
+            </div>
+            <div th:if="${session.alertMessage != null}" class="alert alert-danger" role="alert">
+                <p th:text="${session.alertMessage}" style="color: red;"></p>
             </div>
             <div>
                 <input type="text" placeholder="Email" name = "email" id="email">

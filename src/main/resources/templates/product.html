@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Product Page</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+<!-- Navigation Bar -->
+    <section id="header">
+      <img
+            th:src="@{/images/logo.png}"
+            width="auto"
+            height="80"
+            class="logo d-inline-block align-top rounded-circle"
+            alt=""
+        />
+  
+          <div>
+              <ul id="navbar">
+                  
+                  <li><a class="active"th:href="@{/}">Home</a></li>
+                  <li>
+                      <a href="productsPage">Shop</a>
+                      <ul class="dropdown">
+                          <li><a th:href="@{/product/origin/ethiopia}"}>Ethiopia</a></li>
+                          <li><a th:href="@{/product/origin/kenya}">Kenya</a></li>
+                          <li><a th:href="@{/product/origin/brazil}">Brazil</a></li>
+                          <li><a th:href="@{/product/origin/colombia}">Colombia</a></li>
+                          <li><a th:href="@{/product/origin/centralamerica}">Central America</a></li>
+                      </ul>
+                  </li>
+                  <li><a href="login2">My Account</a></li>
+                  <li><a href="aboutus">About</a></li>
+                  <li><a href="#form-details">Contact</a></li>
+                  <li id="admin"><a href="adminLogin">Admin</a></li>
+                  <li id="lg-bag"><a href="cart"><i class="far fa-shopping-bag"></i></a></li>
+                  
+                  <a href="#" id="close"><i class="far fa-times"></i></a>
+              </ul>
+          </div>
+          <div id="mobile">
+              <a href="cart.html"><i class="far fa-shopping-bag"></i></a>
+              <i id="bar" class="fas fa-outdent"></i>
+          </div>
+      </section>
+
+<div class="container">
+  <h1 class="mt-5">Product Details</h1>
+  <div class="row">
+    <div class="col-md-4">
+      <img th:src="'data:image/png;base64,' + ${imgUtil.getImgData(product.imageData)}"
+           width="auto"
+           class="img-fluid rounded"
+           alt=""
+      />
+    </div>
+    <div class="col-md-8">
+      <table class="table">
+        <tbody>
+          <tr>
+            <td>Name:</td>
+            <td th:text="${product.productName}"></td>
+          </tr>
+          <tr>
+            <td>Description:</td>
+            <td th:text="${product.productDescription}"></td>
+          </tr>
+          <tr>
+            <td>Price:</td>
+            <td th:text="'£' + ${product.productPrice}">></td>
+          </tr>
+        </tbody>
+      </table>
+      <form method="post" th:action="@{/cart/add}">
+        <input type="hidden" name="productId" th:value="${product.id}" />
+        <div class="form-group">
+          <label for="quantity">Quantity:</label>
+          <input type="number" class="form-control" id="quantity" name="quantity" min="1" value="1">
+        </div>
+        <button type="submit" class="btn btn-sm btn-outline-secondary">Add to cart</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<footer class="">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 text-center">
+        <p>&copy; Webspresso. All rights reserved.</p>
+      </div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
+
