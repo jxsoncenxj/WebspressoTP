@@ -13,7 +13,7 @@
 </head>
 <body>
 <!-- Navigation Bar -->
-    <section id="header">
+     <section id="header">
       <img
             th:src="@{/images/logo.png}"
             width="auto"
@@ -27,7 +27,7 @@
                   
                   <li><a class="active"th:href="@{/}">Home</a></li>
                   <li>
-                      <a href="productsPage">Shop</a>
+                      <a th:href="@{/productsPage}">Shop</a>
                       <ul class="dropdown">
                           <li><a th:href="@{/product/origin/ethiopia}"}>Ethiopia</a></li>
                           <li><a th:href="@{/product/origin/kenya}">Kenya</a></li>
@@ -36,11 +36,11 @@
                           <li><a th:href="@{/product/origin/centralamerica}">Central America</a></li>
                       </ul>
                   </li>
-                  <li><a href="login2">My Account</a></li>
-                  <li><a href="aboutus">About</a></li>
+                  <li><a th:href="@{/login2}">My Account</a></li>
+                  <li><a th:href="@{/aboutus}">About</a></li>
                   <li><a href="#form-details">Contact</a></li>
-                  <li id="admin"><a href="adminLogin">Admin</a></li>
-                  <li id="lg-bag"><a href="cart"><i class="far fa-shopping-bag"></i></a></li>
+                  <li id="admin"><a th:href="@{adminLogin}">Admin</a></li>
+                  <li id="lg-bag"><a th:href="@{/cart}"><i class="far fa-shopping-bag"></i></a></li>
                   
                   <a href="#" id="close"><i class="far fa-times"></i></a>
               </ul>
