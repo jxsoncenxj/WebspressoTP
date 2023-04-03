@@ -14,4 +14,4 @@ username: admin
 
 password: password
 
-(./WebspressoTP/src/main/resources/static/images/img/Screenshot 2023-04-03.png)
+(./WebspressoTP/src/main/resources/static/images/img/Homepage.png)
