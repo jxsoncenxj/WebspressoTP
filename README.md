@@ -14,4 +14,4 @@ username: admin
 
 password: password
 
-![alt text](./WebspressoTP/src/main/resources/static/images/img/Homepage.png)
+![alt text](./src/main/resources/static/images/img/Homepage.png)
