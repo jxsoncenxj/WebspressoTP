@@ -14,4 +14,4 @@ username: admin
 
 password: password
 
-![alt text](./src/main/resources/static/images/img/Homepage.png)
+![Homepage](./src/main/resources/static/images/img/Homepage.png)
